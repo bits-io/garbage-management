@@ -11,6 +11,10 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('Kasir/awal');
+		$where = array(
+			'role' => 'admin'
+		);
+		$data['arr_data'] = $this->m->Get_Where($where, 'tbl_admin');
+		$this->load->view('admin/index', $data);
 	}
 }
