@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Admin extends CI_Controller
+class Sampah extends CI_Controller
 {
 	/**
 	 * Index Page for this controller.
@@ -21,24 +21,14 @@ class Admin extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Models', 'm');
-		if ($this->session->userdata('status_login') != 'login') {
-			redirect('Admin');
-		}
+		if($this->session->login['role'] == 'nasabah') redirect('auth');
 	}
 	public function index()
 	{	
-		// $this->sidebar();
-		// $data = array(
-		// 	'master' => "open",
-		// 	'master_status' => " active",
-		// 	'dashboard' => " active"
-		// );
-		// $this->session->set_userdata($data);
-
-		// $data['dari'] = date('Y-m-d');
-		// $data['sampai'] = date('Y-m-d');
-
-		$this->load->view('admin/index');
+		$data['title'] = 'Data Sampah';
+		$data['button'] = 'Tambah Sampah';
+		$data['arr_data'] = $this->m->Get_Where(['role' => 'admin'], 'tbl_admin');
+		$this->load->view('sampah/index', $data);
 	}
 }
 

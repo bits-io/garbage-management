@@ -108,11 +108,11 @@
                   <form role="form" action="<?= base_url() ?>Auth/login" method="post" class="text-start">
                     <div class="input-group input-group-outline my-3">
                       <label class="form-label"></label>
-                      <input type="text" class="form-control" placeholder="Login">
+                      <input type="text" class="form-control" name="username" placeholder="Login">
                     </div>
                     <div class="input-group input-group-outline mb-3">
                       <label class="form-label"></label>
-                      <input type="password" class="form-control" placeholder="Password">
+                      <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
                     <div class="text-center">
                       <button type="submit" class="btn bg-gradient-secondary w-100 my-4 mb-2">Sign in</button>

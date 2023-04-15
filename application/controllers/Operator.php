@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Nasabah extends CI_Controller
+class Operator extends CI_Controller
 {
 	/**
 	 * Index Page for this controller.
@@ -25,10 +25,10 @@ class Nasabah extends CI_Controller
 	}
 	public function index()
 	{	
-		$data['title'] = 'Data Nasabah';
-		$data['button'] = 'Tambah Nasabah';
+		$data['title'] = 'Data Operator';
+		$data['button'] = 'Tambah Operator';
 		$data['arr_data'] = $this->m->Get_Where(['role' => 'admin'], 'tbl_admin');
-		$this->load->view('nasabah/index', $data);
+		$this->load->view('operator/index', $data);
 	}
 }
 
