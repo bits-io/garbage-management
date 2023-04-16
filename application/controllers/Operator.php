@@ -27,8 +27,20 @@ class Operator extends CI_Controller
 	{	
 		$data['title'] = 'Data Operator';
 		$data['button'] = 'Tambah Operator';
+		$data['page_name'] = 'operator';
 		$data['arr_data'] = $this->m->Get_Where(['role' => 'admin'], 'tbl_admin');
 		$this->load->view('operator/index', $data);
+	}
+	public function add()
+	{	
+		$data['title'] = 'Data Operator';
+		$data['button'] = 'Tambah Operator';
+		$data['page_name'] = 'operator';
+		$this->load->view('operator/add', $data);
+	}
+	public function addAction()
+	{	
+		redirect('operator');
 	}
 }
 

@@ -5,6 +5,8 @@
 <script src="<?= base_url(); ?>assets/js/plugins/dragula/dragula.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/plugins/jkanban/jkanban.js"></script>
 <script src="<?= base_url(); ?>assets/js/plugins/datatables.js"></script>
+<script src="<?= base_url(); ?>assets/js/plugins/choices.min.js"></script>
+<script src="<?= base_url(); ?>assets/js/plugins/multistep-form.js"></script>
 <script>
   const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
     searchable: true,
