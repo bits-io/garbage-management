@@ -55,22 +55,15 @@ class Jenis extends CI_Controller
 			$createdAt = Date('Y-m-d h:i:s');
 			$updateAt = $createdAt;
 	
-			$kodeNasabah = 'NSB-'.Date('Y-his');
-			
 			$data = [
-				'kode_nasabah' => $kodeNasabah,
-				'nama' => $this->input->post('nama'),
-				'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-				'tgl_lahir' => $this->input->post('tgl_lahir'),
-				'no_telepon' => $this->input->post('no_telepon'),
-				'username' => $this->input->post('username'),
-				'password' => $this->input->post('password'),
-				'status_pengguna' => 'nasabah',
+				'nama_jenis_sampah' => $this->input->post('nama_jenis_sampah'),
 				'created_at' => $createdAt,
 				'updated_at' => $updateAt
 			];
 	
 			$this->m->Save($data, 'tbl_jenis_sampah');
+			$this->session->unset_userdata('error');
+			$this->session->set_flashdata('success', 'Tambah data berhasil!');
 	
 			redirect('jenis');
 		} catch (\Throwable $th) {
@@ -121,12 +114,7 @@ class Jenis extends CI_Controller
 			$updatedAt = Date('Y-m-d h:i:s');
 			
 			$data = [
-				'nama' => $this->input->post('nama'),
-				'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-				'tgl_lahir' => $this->input->post('tgl_lahir'),
-				'no_telepon' => $this->input->post('no_telepon'),
-				'username' => $this->input->post('username'),
-				'password' => $this->input->post('password'),
+				'nama_jenis_sampah' => $this->input->post('nama_jenis_sampah'),
 				'updated_at' => $updatedAt
 			];
 	
@@ -179,7 +167,7 @@ class Jenis extends CI_Controller
 			redirect('jenis');
 		}
 
-		$data['data'] = $this->m->Delete(['id_jenis' => $id], 'tbl_jenis');
+		$data['data'] = $this->m->Delete(['id_jenis' => $id], 'tbl_jenis_sampah');
 
 		$data['title'] = 'Data Jenis';
 		$data['button'] = 'Tambah Jenis';

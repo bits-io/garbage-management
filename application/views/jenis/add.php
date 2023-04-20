@@ -38,7 +38,7 @@
 														<div class="col-12">
 															<div class="input-group input-group-static">
 																<label class="">Nama Jenis Sampah</label>
-																<input required name="nama" placeholder="Nama Jenis Sampah" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
+																<input required name="nama_jenis_sampah" placeholder="Nama Jenis Sampah" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
 														</div>
 													</div>
 													<div class="button-row d-flex justify-content-end mt-4">

@@ -58,10 +58,10 @@
                 <table class="table table-flush" id="datatable-search">
                   <thead class="thead-light">
                     <tr>
-                      <th>Nama Operator</th>
-                      <th>Nama Sampah</th>
-                      <th>Nama Jenis Sampah</th>
-					  <th>Harga</th>
+                      <th>Kode Nasabah</th>
+                      <th>Nama Nasabah</th>
+                      <th>Tanggal</th>
+					  <th>Total</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>

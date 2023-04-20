@@ -23,13 +23,12 @@
 					<div class="row gx-4 mb-2">
 					<div class="col-auto">
 						<div class="avatar avatar-xl position-relative">
-						<img src="https://img.icons8.com/cotton/64/null/person-male--v2.png" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+						<img src="https://img.icons8.com/sf-black-filled/64/1A1A1A/waste.png" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
 						</div>
 					</div>
 					<div class="col-auto my-auto">
 						<div class="h-100">
-							<h5 class="mb-1"> <?= $data[0]->nama ?> </h5>
-							<p class="mb-0"> <?= $data[0]->role ?></p>
+							<h5 class="mb-1"> <?= $data[0]->nama_jenis_sampah ?> </h5>
 						</div>
 					</div>
 					</div>
@@ -47,28 +46,7 @@
 							<div class="card-body p-3">
 							<ul class="list-group">
 								<li class="list-group-item border-0 ps-0 pt-0 text-sm">
-								<strong class="text-dark">Kode:</strong> &nbsp; <?= $data[0]->kode_admin ?>
-								</li>
-								<li class="list-group-item border-0 ps-0 text-sm">
-								<strong class="text-dark">Username:</strong> &nbsp; <?= $data[0]->username ?>
-								</li>
-								<li class="list-group-item border-0 ps-0 text-sm">
-								<strong class="text-dark">Password:</strong> &nbsp; *****
-								</li>
-								<li class="list-group-item border-0 ps-0 text-sm">
-								<strong class="text-dark">Nama:</strong> &nbsp; <?= $data[0]->nama ?>
-								</li>
-								<li class="list-group-item border-0 ps-0 text-sm">
-								<strong class="text-dark">Role:</strong> &nbsp; <?= $data[0]->role ?>
-								</li>
-								<li class="list-group-item border-0 ps-0 text-sm">
-								<strong class="text-dark">No Telepon:</strong> &nbsp; <?= $data[0]->no_telepon ?>
-								</li>
-								<li class="list-group-item border-0 ps-0 text-sm">
-								<strong class="text-dark">Jenis Kelamin:</strong> &nbsp; <?= $data[0]->jenis_kelamin ?>
-								</li>
-								<li class="list-group-item border-0 ps-0 text-sm">
-								<strong class="text-dark">Tanggal Lahir:</strong> &nbsp; <?= $data[0]->tgl_lahir ?>
+								<strong class="text-dark">Nama Jenis Sampah:</strong> &nbsp; <?= $data[0]->nama_jenis_sampah ?>
 								</li>
 							</ul>
 							</div>
