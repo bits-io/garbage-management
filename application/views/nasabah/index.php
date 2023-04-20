@@ -17,12 +17,37 @@
       <div class="container-fluid py-4">
         <div class="d-sm-flex justify-content-between">
           <div>
-            <a href="javascript:;" class="btn btn-icon bg-gradient-primary"> <?php echo $button ?> </a>
+					<a href="<?= base_url($page_name.'/add') ?>" class="btn btn-icon bg-gradient-primary"> <?php echo $button ?> </a>
           </div>
             <button class="btn btn-icon btn-outline-dark ms-2 export" data-type="csv" type="button">
               <i class="material-icons text-xs position-relative">archive</i> Export CSV </button>
           </div>
         </div>
+				<?php if ($this->session->flashdata('success')) : ?>
+						<div class="alert alert-success alert-dismissible text-white fade show" role="alert">
+								<span class="alert-icon align-middle">
+									<span class="material-icons text-md">
+									thumb_up_off_alt
+									</span>
+								</span>
+								<span class="alert-text"> <?= $this->session->flashdata('success') ?>!</span>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+								</button>
+						</div>
+					<?php elseif($this->session->flashdata('error')) : ?>
+						<div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
+								<span class="alert-icon align-middle">
+									<span class="material-icons text-md">
+									thumb_down_off_alt
+									</span>
+								</span>
+								<span class="alert-text"> <?= $this->session->flashdata('error') ?>!</span>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+								</button>
+						</div>
+					<?php endif; ?>
         <div class="row">
           <div class="col-12">
             <div class="card">
@@ -34,7 +59,7 @@
                   <thead class="thead-light">
                     <tr>
                       <th>Kode</th>
-											<th>Username</th>
+					  <th>Username</th>
                       <th>Nama</th>
                       <th>Jenis Kelamin</th>
                       <th>Tanggal Lahir</th>
@@ -48,7 +73,7 @@
 						<tr>
 							<td>
 								<div class="d-flex align-items-center">
-									<p class="text-xs font-weight-normal ms-2 mb-0"><?= $data->kode_admin ?></p>
+									<p class="text-xs font-weight-normal ms-2 mb-0"><?= $data->kode_nasabah ?></p>
 								</div>
 							</td>
 							<td class="font-weight-normal">
@@ -73,17 +98,17 @@
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
 										<li>
-											<a class="dropdown-item" href="#">
+											<a class="dropdown-item" href="<?= base_url(  $page_name.'/edit/' . $data->id_nasabah) ?>">
 												<i class="material-icons text-warning">edit</i> Edit
 											</a>
 										</li>
 										<li>
-											<a class="dropdown-item" href="#">
+											<a class="dropdown-item" onclick="return confirm('Apakah anda yakin?')" href="<?= base_url(  $page_name.'/delete/' . $data->id_nasabah) ?>">
 												<i class="material-icons text-danger">delete</i> Delete
 											</a>
 										</li>
 										<li>
-											<a class="dropdown-item" href="#">
+											<a class="dropdown-item" href="<?= base_url(  $page_name.'/detail/' . $data->id_nasabah) ?>">
 													<i class="material-icons text-info">topic</i> Detail
 											</a>
 										</li>							

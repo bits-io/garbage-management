@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Nasabah extends CI_Controller
+class Jenis extends CI_Controller
 {
 	/**
 	 * Index Page for this controller.
@@ -26,11 +26,11 @@ class Nasabah extends CI_Controller
 	}
 	public function index()
 	{	
-		$data['title'] = 'Data Nasabah';
-		$data['button'] = 'Tambah Nasabah';
-		$data['page_name'] = 'nasabah';
-		$data['arr_data'] = $this->m->Get_All('tbl_nasabah', '*');
-		$this->load->view('nasabah/index', $data);
+		$data['title'] = 'Data Jenis';
+		$data['button'] = 'Tambah Jenis';
+		$data['page_name'] = 'jenis';
+		$data['arr_data'] = $this->m->Get_All('tbl_jenis_sampah', '*');
+		$this->load->view('jenis/index', $data);
 	}
 	public function add()
 	{	
@@ -39,10 +39,10 @@ class Nasabah extends CI_Controller
 			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
 			redirect('dashboard');
 		}
-		$data['title'] = 'Data Nasabah';
-		$data['button'] = 'Tambah Nasabah';
-		$data['page_name'] = 'nasabah';
-		$this->load->view('nasabah/add', $data);
+		$data['title'] = 'Data Jenis';
+		$data['button'] = 'Tambah Jenis';
+		$data['page_name'] = 'jenis';
+		$this->load->view('jenis/add', $data);
 	}
 	public function add_process()
 	{	
@@ -52,14 +52,6 @@ class Nasabah extends CI_Controller
 				$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
 				redirect('dashboard');
 			}
-			$get_admin = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_admin');
-			$get_nasabah = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_nasabah');
-			if($get_admin[0]->username == $this->input->post('username') || $get_nasabah[0]->username == $this->input->post('username')){
-				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Username telah digunakan', 5);
-				redirect('nasabah');
-			}
-	
 			$createdAt = Date('Y-m-d h:i:s');
 			$updateAt = $createdAt;
 	
@@ -78,13 +70,13 @@ class Nasabah extends CI_Controller
 				'updated_at' => $updateAt
 			];
 	
-			$this->m->Save($data, 'tbl_nasabah');
+			$this->m->Save($data, 'tbl_jenis_sampah');
 	
-			redirect('nasabah');
+			redirect('jenis');
 		} catch (\Throwable $th) {
 			$this->session->unset_userdata('success');
 			$this->session->set_flashdata('error', $th->getMessage(), 5);
-			redirect('nasabah');
+			redirect('jenis');
 		}
 	}
 	public function edit()
@@ -96,18 +88,18 @@ class Nasabah extends CI_Controller
 			redirect('dashboard');
 		}
 
-		if (!$this->m->Get_Where(['id_nasabah' => $id], 'tbl_nasabah')) {
+		if (!$this->m->Get_Where(['id_jenis' => $id], 'tbl_jenis_sampah')) {
 			$this->session->unset_userdata('success');
 			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
-			redirect('nasabah');
+			redirect('jenis');
 		}
 
-		$data['data'] = $this->m->Get_Where(['id_nasabah' => $id], 'tbl_nasabah');
+		$data['data'] = $this->m->Get_Where(['id_jenis' => $id], 'tbl_jenis_sampah');
 
-		$data['title'] = 'Data Nasabah';
-		$data['button'] = 'Tambah Nasabah';
-		$data['page_name'] = 'nasabah';
-		$this->load->view('nasabah/edit', $data);
+		$data['title'] = 'Data Jenis';
+		$data['button'] = 'Tambah Jenis';
+		$data['page_name'] = 'jenis';
+		$this->load->view('jenis/edit', $data);
 	}
 	public function edit_process()
 	{	
@@ -120,21 +112,10 @@ class Nasabah extends CI_Controller
 				redirect('dashboard');
 			}
 
-			if (!$this->m->Get_Where(['id_nasabah' => $id], 'tbl_nasabah')) {
+			if (!$this->m->Get_Where(['id_jenis' => $id], 'tbl_jenis_sampah')) {
 				$this->session->unset_userdata('success');
 				$this->session->set_flashdata('error', 'Data tidak ditemukan!', 5);
-				redirect('nasabah');
-			}
-
-			$get_admin = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_admin');
-			$get_nasabah = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_nasabah');
-
-			if (count($get_admin) > 1 || count($get_nasabah) > 1){
-			if($get_admin[0]->username == $this->input->post('username') || $get_nasabah[0]->username == $this->input->post('username')){
-				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Username telah digunakan', 5);
-				redirect('nasabah');
-			}
+				redirect('jenis');
 			}
 	
 			$updatedAt = Date('Y-m-d h:i:s');
@@ -149,16 +130,16 @@ class Nasabah extends CI_Controller
 				'updated_at' => $updatedAt
 			];
 	
-			$this->m->Update(['id_nasabah' => $id], $data, 'tbl_nasabah');
+			$this->m->Update(['id_jenis' => $id], $data, 'tbl_jenis_sampah');
 			
 			
 			$this->session->unset_userdata('error');
 			$this->session->set_flashdata('success', 'Data berhasil diubah!');
-			redirect('nasabah');
+			redirect('jenis');
 		} catch (\Throwable $th) {
 			$this->session->unset_userdata('success');
 			$this->session->set_flashdata('error', $th->getMessage(), 5);
-			redirect('nasabah');
+			redirect('jenis');
 		}
 	}
 	public function detail()
@@ -170,18 +151,18 @@ class Nasabah extends CI_Controller
 			redirect('dashboard');
 		}
 
-		if (!$this->m->Get_Where(['id_nasabah' => $id], 'tbl_nasabah')) {
+		if (!$this->m->Get_Where(['id_jenis' => $id], 'tbl_jenis_sampah')) {
 			$this->session->unset_userdata('success');
 			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
-			redirect('nasabah');
+			redirect('jenis');
 		}
 
-		$data['data'] = $this->m->Get_Where(['id_nasabah' => $id], 'tbl_nasabah');
+		$data['data'] = $this->m->Get_Where(['id_jenis' => $id], 'tbl_jenis_sampah');
 
-		$data['title'] = 'Data Nasabah';
-		$data['button'] = 'Tambah Nasabah';
-		$data['page_name'] = 'nasabah';
-		$this->load->view('nasabah/detail', $data);
+		$data['title'] = 'Data Jenis';
+		$data['button'] = 'Tambah Jenis';
+		$data['page_name'] = 'jenis';
+		$this->load->view('jenis/detail', $data);
 	}
 	public function delete()
 	{	
@@ -192,22 +173,22 @@ class Nasabah extends CI_Controller
 			redirect('dashboard');
 		}
 
-		if (!$this->m->Get_Where(['id_nasabah' => $id], 'tbl_nasabah')) {
+		if (!$this->m->Get_Where(['id_jenis' => $id], 'tbl_jenis_sampah')) {
 			$this->session->unset_userdata('success');
 			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
-			redirect('nasabah');
+			redirect('jenis');
 		}
 
-		$data['data'] = $this->m->Delete(['id_nasabah' => $id], 'tbl_nasabah');
+		$data['data'] = $this->m->Delete(['id_jenis' => $id], 'tbl_jenis');
 
-		$data['title'] = 'Data Nasabah';
-		$data['button'] = 'Tambah nasabah';
-		$data['page_name'] = 'nasabah';
+		$data['title'] = 'Data Jenis';
+		$data['button'] = 'Tambah Jenis';
+		$data['page_name'] = 'jenis';
 
 		$this->session->unset_userdata('success');
 		$this->session->set_flashdata('success', 'Data berhasil dihapus!');
 
-		redirect('nasabah');
+		redirect('jenis');
 	}
 
 }

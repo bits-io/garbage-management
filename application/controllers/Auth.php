@@ -23,6 +23,7 @@ class Auth extends CI_Controller
 		if(count($get_admin) > 0){
 			if($get_admin[0]->password == $this->input->post('password')){
 				$session = [
+					'id_user' => $get_admin[0]->id_admin,
 					'kode' => $get_admin[0]->kode_admin,
 					'nama' => $get_admin[0]->nama,
 					'username' => $get_admin[0]->username,
@@ -31,7 +32,7 @@ class Auth extends CI_Controller
 				];
 
 				$this->session->set_userdata('login', $session);
-				$this->session->set_flashdata('success', '<strong>Login</strong> Berhasil!');
+				$this->session->set_flashdata('success', '<strong>Login</strong> Berhasil!', 5);
 				redirect('dashboard');
 			} else {
 				redirect('auth?msg=gagal');
@@ -42,6 +43,7 @@ class Auth extends CI_Controller
 		if(count($get_nasabah) > 0){
 			if($get_nasabah[0]->password == $this->input->post('password')){
 				$session = [
+					'id_user' => $get_nasabah[0]->id_nasabah,
 					'kode' => $get_nasabah[0]->kode_nasabah,
 					'nama' => $get_nasabah[0]->nama,
 					'username' => $get_nasabah[0]->username,
@@ -50,8 +52,8 @@ class Auth extends CI_Controller
 				];
 
 				$this->session->set_userdata('login', $session);
-				$this->session->set_flashdata('success', '<strong>Login</strong> Berhasil!');
-				redirect('dashboard');
+				$this->session->set_flashdata('success', '<strong>Login</strong> Berhasil!', 5);
+				redirect('dashboard/nasabah');
 			} else {
 				redirect('auth?msg=gagal');
 			}

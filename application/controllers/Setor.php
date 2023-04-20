@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Sampah extends CI_Controller
+class Setor extends CI_Controller
 {
 	/**
 	 * Index Page for this controller.
@@ -36,7 +36,7 @@ class Sampah extends CI_Controller
 		$this->db->join('tbl_admin', 'tbl_sampah.id_admin = tbl_admin.id_admin', 'left');
 		$data['arr_data'] = $this->db->get()->result();
 
-		$this->load->view('sampah/index', $data);
+		$this->load->view('setor/index', $data);
 	}
 	public function add()
 	{	

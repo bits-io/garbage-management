@@ -30,49 +30,15 @@
 										</div>
 									</div>
 									<div class="card-body">
-										<form action="<?= base_url($page_name.'/add_process') ?>" method="post" class="multisteps-form__form" style="height: 330px;">
+										<form action="<?= base_url($page_name.'/add_process') ?>" method="post" class="multisteps-form__form" style="height: 200px;">
 											<div class="multisteps-form__panel border-radius-xl bg-white js-active" data-animation="FadeIn">
 												<h5 class="font-weight-bolder mb-1">Tambah <?= $title ?></h5>
 												<div class="multisteps-form__content">
 													<div class="row mt-3">
-														<div class="col-12 col-sm-6">
+														<div class="col-12">
 															<div class="input-group input-group-static">
-																<label class="">Nama</label>
-																<input required name="nama" placeholder="Nama" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
-														</div>
-														<div class="col-12 col-sm-6 mt-3 mt-sm-0">
-															<div class="input-group input-group-static">
-																<label for="jenisKelaminFormControl" class="">Jenis Kelamin</label>
-																<select required name="jenis_kelamin" class="form-control" id="jenisKelaminFormControl">
-																	<option value="">Pilih jenis kelamin</option>
-																	<option value="Laki-laki">Laki-laki</option>
-																	<option value="Perempuan">Perempuan</option>
-																</select>	
-															</div>
-														</div>
-													</div>
-													<div class="row mt-3">
-														<div class="col-12 col-sm-6">
-															<div class="input-group input-group-static">
-																<label class="">Tanggal Lahir</label>
-																<input required name="tgl_lahir" placeholder="Tanggal Lahir" class="multisteps-form__input form-control" type="date" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
-														</div>
-														<div class="col-12 col-sm-6 mt-3 mt-sm-0">
-															<div class="input-group input-group-static">
-																<label class="">No Telepon</label>
-																<input required name="no_telepon" placeholder="No Telepon" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
-														</div>
-													</div>
-													<div class="row mt-3">
-														<div class="col-12 col-sm-6">
-															<div class="input-group input-group-static">
-																<label class="">Username</label>
-																<input required name="username" placeholder="Username" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
-														</div>
-														<div class="col-12 col-sm-6 mt-3 mt-sm-0">
-															<div class="input-group input-group-static">
-																<label class="">Password</label>
-																<input required name="password" placeholder="Password" class="multisteps-form__input form-control" type="password" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
+																<label class="">Nama Jenis Sampah</label>
+																<input required name="nama" placeholder="Nama Jenis Sampah" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
 														</div>
 													</div>
 													<div class="button-row d-flex justify-content-end mt-4">

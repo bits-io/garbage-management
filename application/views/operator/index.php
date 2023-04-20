@@ -23,6 +23,31 @@
               <i class="material-icons text-xs position-relative">archive</i> Export CSV </button>
           </div>
         </div>
+				<?php if ($this->session->flashdata('success')) : ?>
+						<div class="alert alert-success alert-dismissible text-white fade show" role="alert">
+								<span class="alert-icon align-middle">
+									<span class="material-icons text-md">
+									thumb_up_off_alt
+									</span>
+								</span>
+								<span class="alert-text"> <?= $this->session->flashdata('success') ?>!</span>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+								</button>
+						</div>
+					<?php elseif($this->session->flashdata('error')) : ?>
+						<div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
+								<span class="alert-icon align-middle">
+									<span class="material-icons text-md">
+									thumb_down_off_alt
+									</span>
+								</span>
+								<span class="alert-text"> <?= $this->session->flashdata('error') ?>!</span>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+								</button>
+						</div>
+					<?php endif; ?>
         <div class="row">
           <div class="col-12">
             <div class="card">
@@ -73,17 +98,17 @@
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
 										<li>
-											<a class="dropdown-item" href="#">
+											<a class="dropdown-item" href="<?= base_url(  $page_name.'/edit/' . $data->id_admin) ?>">
 												<i class="material-icons text-warning">edit</i> Edit
 											</a>
 										</li>
 										<li>
-											<a class="dropdown-item" href="#">
+											<a class="dropdown-item" onclick="return confirm('Apakah anda yakin?')" href="<?= base_url(  $page_name.'/delete/' . $data->id_admin) ?>">
 												<i class="material-icons text-danger">delete</i> Delete
 											</a>
 										</li>
 										<li>
-											<a class="dropdown-item" href="#">
+											<a class="dropdown-item" href="<?= base_url(  $page_name.'/detail/' . $data->id_admin) ?>">
 													<i class="material-icons text-info">topic</i> Detail
 											</a>
 										</li>							

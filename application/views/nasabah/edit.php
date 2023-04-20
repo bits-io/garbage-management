@@ -30,7 +30,7 @@
 										</div>
 									</div>
 									<div class="card-body">
-										<form action="<?= base_url($page_name.'/edit_process/'.$data[0]->id_admin) ?>" method="post" class="multisteps-form__form" style="height: 330px;">
+										<form action="<?= base_url($page_name.'/edit_process/'.$data[0]->id_nasabah) ?>" method="post" class="multisteps-form__form" style="height: 330px;">
 											<div class="multisteps-form__panel border-radius-xl bg-white js-active" data-animation="FadeIn">
 												<h5 class="font-weight-bolder mb-1">Edit <?= $title ?></h5>
 												<div class="multisteps-form__content">

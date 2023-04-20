@@ -30,49 +30,35 @@
 										</div>
 									</div>
 									<div class="card-body">
-										<form action="<?= base_url($page_name.'/edit_process/'.$data[0]->id_admin) ?>" method="post" class="multisteps-form__form" style="height: 330px;">
+										<form action="<?= base_url($page_name.'/edit_process/'.$data[0]->id_sampah) ?>" method="post" class="multisteps-form__form" style="height: 330px;">
 											<div class="multisteps-form__panel border-radius-xl bg-white js-active" data-animation="FadeIn">
 												<h5 class="font-weight-bolder mb-1">Edit <?= $title ?></h5>
 												<div class="multisteps-form__content">
-													<div class="row mt-3">
-														<div class="col-12 col-sm-6">
+												<div class="row mt-3">
+														<div class="col-12 col-sm-12 mt-3 mt-sm-0">
 															<div class="input-group input-group-static">
-																<label class="">Nama</label>
-																<input value="<?= $data[0]->nama ?>"  required name="nama" placeholder="Nama" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
-														</div>
-														<div class="col-12 col-sm-6 mt-3 mt-sm-0">
-															<div class="input-group input-group-static">
-																<label for="jenisKelaminFormControl" class="">Jenis Kelamin</label>
-																<select required name="jenis_kelamin" class="form-control" id="jenisKelaminFormControl">
-																	<option value="<?= $data[0]->jenis_kelamin ?>"><?= $data[0]->jenis_kelamin ?></option>
-																	<option value="Laki-laki">Laki-laki</option>
-																	<option value="Perempuan">Perempuan</option>
-																</select>	
+																<label class="">Nama Sampah</label>
+																<input value="<?= $data[0]->nama_sampah ?>" required name="nama_sampah" placeholder="Nama Sampah" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> 
 															</div>
 														</div>
 													</div>
 													<div class="row mt-3">
-														<div class="col-12 col-sm-6">
-															<div class="input-group input-group-static">
-																<label class="">Tanggal Lahir</label>
-																<input value="<?= $data[0]->tgl_lahir ?>" required name="tgl_lahir" placeholder="Tanggal Lahir" class="multisteps-form__input form-control" type="date" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
-														</div>
 														<div class="col-12 col-sm-6 mt-3 mt-sm-0">
 															<div class="input-group input-group-static">
-																<label class="">No Telepon</label>
-																<input value="<?= $data[0]->no_telepon ?>" required name="no_telepon" placeholder="No Telepon" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
+																<label for="jenisKelaminFormControl" class="">Jenis Sampah</label>
+																<select required name="id_jenis" class="form-control" id="jenisKelaminFormControl">
+																	<option value="<?= $data[0]->id_jenis ?>"><?= $data[0]->nama_jenis_sampah ?></option>
+																	<?php foreach ($jenis_sampah as $jenis): ?>
+																		<option value="<?= $jenis->id_jenis ?>"><?= $jenis->nama_jenis_sampah ?></option>
+																	<?php endforeach ?>
+																</select>	
+															</div>
 														</div>
-													</div>
-													<div class="row mt-3">
 														<div class="col-12 col-sm-6">
 															<div class="input-group input-group-static">
-																<label class="">Username</label>
-																<input value="<?= $data[0]->username ?>" required name="username" placeholder="Username" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
-														</div>
-														<div class="col-12 col-sm-6 mt-3 mt-sm-0">
-															<div class="input-group input-group-static">
-																<label class="">Password</label>
-																<input value="<?= $data[0]->password ?>" required name="password" placeholder="Password" class="multisteps-form__input form-control" type="password" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
+																<label class="">Harga</label>
+																<input value="<?= $data[0]->harga ?>" required name="harga" placeholder="Harga" class="multisteps-form__input form-control" type="number" onfocus="focused(this)" onfocusout="defocused(this)"> 
+															</div>
 														</div>
 													</div>
 													<div class="button-row d-flex justify-content-end mt-4">
