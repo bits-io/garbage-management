@@ -7,6 +7,8 @@
 <script src="<?= base_url(); ?>assets/js/plugins/datatables.js"></script>
 <script src="<?= base_url(); ?>assets/js/plugins/choices.min.js"></script>
 <script src="<?= base_url(); ?>assets/js/plugins/multistep-form.js"></script>
+<script src="<?= base_url(); ?>assets/js/plugins/jquery/jquery.min.js"></script>
+<script src="<?= base_url(); ?>assets/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 <script>
   const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
     searchable: true,
@@ -36,7 +38,12 @@
   }
 </script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<script src="
-	<?= base_url(); ?>assets/js/material-dashboard.min.js?v=3.0.6">
+<script src="<?= base_url(); ?>assets/js/material-dashboard.min.js?v=3.0.6"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+	// To style all selects
+	$(document).ready(function() {
+    $('select').select2();
+	});
 </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vb26e4fa9e5134444860be286fd8771851679335129114" integrity="sha512-M3hN/6cva/SjwrOtyXeUa5IuCT0sedyfT+jK/OV+s+D0RnzrTfwjwJHhd+wYfMm9HJSrZ1IKksOdddLuN6KOzw==" data-cf-beacon='{"rayId":"7b19ce871b533f8d","version":"2023.3.0","r":1,"token":"1b7cbb72744b40c580f8633c6b62637e","si":100}' crossorigin="anonymous"></script>

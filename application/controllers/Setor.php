@@ -26,14 +26,13 @@ class Setor extends CI_Controller
 	}
 	public function index()
 	{	
-		$data['title'] = 'Data Sampah';
-		$data['button'] = 'Tambah Sampah';
-		$data['page_name'] = 'sampah';
+		$data['title'] = 'Data Setor';
+		$data['button'] = 'Tambah Setor';
+		$data['page_name'] = 'setor';
 
-		$this->db->select('tbl_sampah.id_sampah, tbl_sampah.id_jenis, tbl_sampah.id_admin, tbl_sampah.nama_sampah, tbl_sampah.harga, tbl_sampah.created_at, tbl_sampah.updated_at, tbl_jenis_sampah.nama_jenis_sampah, tbl_admin.kode_admin, tbl_admin.nama, tbl_admin.jenis_kelamin, tbl_admin.tgl_lahir, tbl_admin.no_telepon, tbl_admin.username, tbl_admin.password, tbl_admin.role, tbl_admin.created_at, tbl_admin.updated_at');
-		$this->db->from('tbl_sampah');
-		$this->db->join('tbl_jenis_sampah', 'tbl_sampah.id_jenis = tbl_jenis_sampah.id_jenis', 'left');
-		$this->db->join('tbl_admin', 'tbl_sampah.id_admin = tbl_admin.id_admin', 'left');
+		$this->db->select('tbl_transaksi.id_transaksi, tbl_transaksi.id_nasabah, tbl_transaksi.tgl_transaksi, tbl_transaksi.total, tbl_transaksi.created_at, tbl_transaksi.updated_at, tbl_nasabah.kode_nasabah, tbl_nasabah.nama, tbl_nasabah.jenis_kelamin, tbl_nasabah.tgl_lahir, tbl_nasabah.no_telepon, tbl_nasabah.username, tbl_nasabah.password, tbl_nasabah.status_pengguna');
+		$this->db->from('tbl_transaksi');
+		$this->db->join('tbl_nasabah', 'tbl_transaksi.id_nasabah = tbl_nasabah.id_nasabah');
 		$data['arr_data'] = $this->db->get()->result();
 
 		$this->load->view('setor/index', $data);
@@ -45,13 +44,15 @@ class Setor extends CI_Controller
 			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
 			redirect('dashboard');
 		}
-		$data['title'] = 'Data Sampah';
-		$data['button'] = 'Tambah Sampah';
-		$data['page_name'] = 'sampah';
+		$data['title'] = 'Data Setor';
+		$data['button'] = 'Tambah Setor';
+		$data['page_name'] = 'setor';
+		$data['dateNow'] = Date('Y-m-d');
 
-		$data['jenis_sampah'] = $this->m->Get_All('tbl_jenis_sampah', '*');
+		$data['sampah'] = $this->m->Get_All('tbl_sampah', '*');
+		$data['nasabah'] = $this->m->Get_All('tbl_nasabah', '*');
 
-		$this->load->view('sampah/add', $data);
+		$this->load->view('setor/add', $data);
 	}
 	public function add_process()
 	{	
@@ -61,97 +62,77 @@ class Setor extends CI_Controller
 				$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
 				redirect('dashboard');
 			}
-		
+			$id_nasabah = $this->input->post('id_nasabah');
+			$keranjang = $this->input->post('keranjang');
 	
 			$createdAt = Date('Y-m-d h:i:s');
-			$updateAt = $createdAt;
-	
+			$updatedAt = $createdAt;
 			
-			$data = [
-				'id_admin' => $this->session->login['id_user'],
-				'id_jenis' => $this->input->post('id_jenis'),
-				'nama_sampah' => $this->input->post('nama_sampah'),
-				'harga' => $this->input->post('harga'),
+			$total = 0;
+			foreach ($keranjang as $item) {
+				$total += $item['jumlah_harga'];
+			}
+
+			if (count($this->m->Get_Where(['id_nasabah' => $id], 'tbl_tabungan')) > 0) {
+				$data_tabungan = array(
+					'id_nasabah' => $id_nasabah,
+					'jumlah_tabungan' => 0,
+					'created_at' => $createdAt,
+					'updated_at' => $updatedAt
+				);
+				$this->m->Save($data_tabungan, 'tbl_tabungan');
+			}	
+			$tabungan = $this->m->Get_Where(['id_nasabah' => $id_nasabah], 'tbl_tabungan');
+
+			$data_detail_tabungan = array(
+				'id_tabungan' => $tabungan[0]->id_tabungan,
+				'tgl_transaksi'	=> $createdAt,
+				'sisa_tabungan'	=> $tabungan[0]->jumlah_tabungan,
+				'nominal'	=> $total,
 				'created_at' => $createdAt,
-				'updated_at' => $updateAt
-			];
-	
-			$this->m->Save($data, 'tbl_sampah');
-	
-			redirect('sampah');
-		} catch (\Throwable $th) {
-			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', $th->getMessage(), 5);
-			redirect('sampah');
-		}
-	}
-	public function edit()
-	{	
-		$id = intval($this->uri->segment(3));
-		if ($this->session->login['role'] == 'nasabah'){
-			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Edit data hanya untuk admin!');
-			redirect('dashboard');
-		}
-
-		if (!$this->m->Get_Where(['id_sampah' => $id], 'tbl_sampah')) {
-			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
-			redirect('sampah');
-		}
-
-		$data['jenis_sampah'] = $this->m->Get_All('tbl_jenis_sampah', '*');
-
-		$this->db->select('tbl_sampah.id_sampah, tbl_sampah.id_jenis, tbl_sampah.id_admin, tbl_sampah.nama_sampah, tbl_sampah.harga, tbl_sampah.created_at, tbl_sampah.updated_at, tbl_jenis_sampah.nama_jenis_sampah, tbl_admin.kode_admin, tbl_admin.nama, tbl_admin.jenis_kelamin, tbl_admin.tgl_lahir, tbl_admin.no_telepon, tbl_admin.username, tbl_admin.password, tbl_admin.role, tbl_admin.created_at, tbl_admin.updated_at');
-		$this->db->from('tbl_sampah');
-		$this->db->join('tbl_jenis_sampah', 'tbl_sampah.id_jenis = tbl_jenis_sampah.id_jenis', 'left');
-		$this->db->join('tbl_admin', 'tbl_sampah.id_admin = tbl_admin.id_admin', 'left');
-		$this->db->where('tbl_sampah.id_sampah', $id);
-		$data['data'] = $this->db->get()->result();
-
-		$data['title'] = 'Data Sampah';
-		$data['button'] = 'Tambah Sampah';
-		$data['page_name'] = 'sampah';
-		$this->load->view('sampah/edit', $data);
-	}
-	public function edit_process()
-	{	
-		try {
-			$id = intval($this->uri->segment(3));
-
-			if ($this->session->login['role'] == 'nasabah'){
-				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Edit data hanya untuk admin!', 5);
-				redirect('dashboard');
-			}
-
-			if (!$this->m->Get_Where(['id_sampah' => $id], 'tbl_sampah')) {
-				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Data tidak ditemukan!', 5);
-				redirect('sampah');
-			}
-	
-			$updatedAt = Date('Y-m-d h:i:s');
-			
-			$data = [
-				'id_jenis' => $this->input->post('id_jenis'),
-				'nama_sampah' => $this->input->post('nama_sampah'),
-				'harga' => $this->input->post('harga'),
 				'updated_at' => $updatedAt
-			];
+			);
+			$this->m->Save($data_detail_tabungan, 'tbl_detail_tabungan');
+
+			
+			// Insert data ke tabel transaksi
+			$data_transaksi = array(
+				'id_nasabah' => $id_nasabah,
+				'tgl_transaksi' => $createdAt,
+				'total' => $total,
+				'created_at' => $createdAt,
+				'updated_at' => $updatedAt
+			);
+			$this->m->Save($data_transaksi, 'tbl_transaksi');
+			$id_transaksi = $this->db->insert_id(); // Ambil ID transaksi yang baru saja diinsert
 	
-			$this->m->Update(['id_sampah' => $id], $data, 'tbl_sampah');
-			
-			
+			// Looping untuk insert data ke tabel detail_transaksi
+			foreach ($keranjang as $item) {
+				$data_detail_transaksi = array(
+					'id_sampah' => intval($item['id_sampah']),
+					'id_transaksi' => intval($id_transaksi),
+					'berat_sampah' => intval($item['berat_sampah']),
+					'harga' => intval($item['jumlah_harga']),
+					'created_at' => $createdAt,
+					'updated_at' => $updatedAt
+				);
+				$this->m->Save($data_detail_transaksi, 'tbl_jual');
+			}
+			$jumlah_tabungan = intval($tabungan[0]->jumlah_tabungan + $total);
+			$this->m->Update(['id_nasabah' => $id_nasabah], ['jumlah_tabungan' => $jumlah_tabungan], 'tbl_tabungan');
+
+
 			$this->session->unset_userdata('error');
-			$this->session->set_flashdata('success', 'Data berhasil diubah!');
-			redirect('sampah');
+			$this->session->set_flashdata('success', 'Data berhasil ditambah!');
+	
+			redirect('setor');
 		} catch (\Throwable $th) {
 			$this->session->unset_userdata('success');
 			$this->session->set_flashdata('error', $th->getMessage(), 5);
-			redirect('sampah');
+			redirect('setor');
 		}
 	}
+	
 	public function detail()
 	{
 		$id = intval($this->uri->segment(3));
@@ -161,23 +142,33 @@ class Setor extends CI_Controller
 			redirect('dashboard');
 		}
 
-		if (!$this->m->Get_Where(['id_sampah' => $id], 'tbl_sampah')) {
+		if (!$this->m->Get_Where(['id_transaksi' => $id], 'tbl_transaksi')) {
 			$this->session->unset_userdata('success');
 			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
-			redirect('sampah');
+			redirect('setor');
 		}
 
-		$this->db->select('tbl_sampah.id_sampah, tbl_sampah.id_jenis, tbl_sampah.id_admin, tbl_sampah.nama_sampah, tbl_sampah.harga, tbl_sampah.created_at, tbl_sampah.updated_at, tbl_jenis_sampah.nama_jenis_sampah, tbl_admin.kode_admin, tbl_admin.nama, tbl_admin.jenis_kelamin, tbl_admin.tgl_lahir, tbl_admin.no_telepon, tbl_admin.username, tbl_admin.password, tbl_admin.role, tbl_admin.created_at, tbl_admin.updated_at');
-		$this->db->from('tbl_sampah');
-		$this->db->join('tbl_jenis_sampah', 'tbl_sampah.id_jenis = tbl_jenis_sampah.id_jenis', 'left');
-		$this->db->join('tbl_admin', 'tbl_sampah.id_admin = tbl_admin.id_admin', 'left');
-		$this->db->where('tbl_sampah.id_sampah', $id);
-		$data['data'] = $this->db->get()->result();
+		$tr = $this->db;
+		$tr->select('*');
+		$tr->from('tbl_transaksi');
+		$tr->join('tbl_nasabah', 'tbl_transaksi.id_nasabah = tbl_nasabah.id_nasabah');
+		$tr->where('tbl_transaksi.id_transaksi', $id);
+		$data['tr'] = $tr->get()->result();
+		
+		$detail = $this->db;
+		$detail->select('*');
+		$detail->from('tbl_jual');
+		$detail->join('tbl_sampah', 'tbl_jual.id_sampah = tbl_sampah.id_sampah');
+		$detail->join('tbl_transaksi', 'tbl_jual.id_transaksi = tbl_transaksi.id_transaksi');
+		$detail->join('tbl_nasabah', 'tbl_transaksi.id_nasabah = tbl_nasabah.id_nasabah');
+		$detail->where('tbl_transaksi.id_transaksi', $id);
+		$data['detail'] = $detail->get()->result();
 
-		$data['title'] = 'Data Sampah';
-		$data['button'] = 'Tambah Sampah';
-		$data['page_name'] = 'sampah';
-		$this->load->view('sampah/detail', $data);
+		$data['title'] = 'Data Setor';
+		$data['button'] = 'Tambah Setor';
+		$data['page_name'] = 'setor';
+
+		$this->load->view('setor/detail', $data);
 	}
 	public function delete()
 	{	
@@ -188,22 +179,23 @@ class Setor extends CI_Controller
 			redirect('dashboard');
 		}
 
-		if (!$this->m->Get_Where(['id_sampah' => $id], 'tbl_sampah')) {
+		if (!$this->m->Get_Where(['id_transaksi' => $id], 'tbl_transaksi')) {
 			$this->session->unset_userdata('success');
 			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
-			redirect('sampah');
+			redirect('setor');
 		}
 
-		$data['data'] = $this->m->Delete(['id_sampah' => $id], 'tbl_sampah');
+		$data['tr'] = $this->m->Delete(['id_transaksi' => $id], 'tbl_transaksi');
+		$data['detail'] = $this->m->Delete(['id_transaksi' => $id], 'tbl_jual');
 
-		$data['title'] = 'Data Sampah';
-		$data['button'] = 'Tambah Sampah';
-		$data['page_name'] = 'sampah';
+		$data['title'] = 'Data Setor';
+		$data['button'] = 'Tambah Setor';
+		$data['page_name'] = 'setor';
 
 		$this->session->unset_userdata('success');
 		$this->session->set_flashdata('success', 'Data berhasil dihapus!');
 
-		redirect('sampah');
+		redirect('setor');
 	}
 }
 

@@ -4,8 +4,6 @@
 <link rel="icon" type="image/png" href="https://img.icons8.com/glyph-neue/64/40C057/recycle-bin.png">
 <title>Bank Sampah</title>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-<link href="<?= base_url(); ?>assets/css/nucleo-icons.css" rel="stylesheet" />
-<link href="<?= base_url(); ?>assets/css/nucleo-svg.css" rel="stylesheet" />
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 <link id="pagestyle" href="<?= base_url(); ?>assets/css/material-dashboard.min.css?v=3.0.6" rel="stylesheet" />
@@ -32,25 +30,5 @@
     'GTM-K9BGS8K': true
   });
 </script>
-<script>
-  (function(i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function() {
-      (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m)
-  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-  ga('create', 'UA-46172202-22', 'auto', {
-    allowLinker: true
-  });
-  ga('set', 'anonymizeIp', true);
-  ga('require', 'GTM-K9BGS8K');
-  ga('require', 'displayfeatures');
-  ga('require', 'linker');
-  ga('linker:autoLink', ["2checkout.com", "avangate.com"]);
-</script>
-<script defer data-site="demos.creative-tim.com" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
