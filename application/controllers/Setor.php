@@ -184,9 +184,19 @@ class Setor extends CI_Controller
 			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
 			redirect('setor');
 		}
+		$tr = $this->m->Get_Where(['id_transaksi' => $id], 'tbl_transaksi');
+		$tb = $this->m->Get_Where(['id_nasabah' => $tr[0]->id_nasabah], 'tbl_tabungan');
+		
+		$jumlah_tabungan = $tb[0]->jumlah_tabungan - $tr[0]->total;
+		$updatedAt = Date('Y-m-d h:i:s');
+
+		$data['detail_tb'] = $this->m->Delete(['id_tabungan' => $tb[0]->id_tabungan], 'tbl_detail_tabungan');
+
+		$this->m->Update(['id_nasabah' => $tr[0]->id_nasabah], ['jumlah_tabungan' => $jumlah_tabungan, 'updated_at' => $updatedAt], 'tbl_tabungan');
 
 		$data['tr'] = $this->m->Delete(['id_transaksi' => $id], 'tbl_transaksi');
 		$data['detail'] = $this->m->Delete(['id_transaksi' => $id], 'tbl_jual');
+		
 
 		$data['title'] = 'Data Setor';
 		$data['button'] = 'Tambah Setor';

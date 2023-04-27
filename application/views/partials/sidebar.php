@@ -103,6 +103,22 @@
           </ul>
         </div>
       </li>
+			<li class="nav-item">
+        <a data-bs-toggle="collapse" href="#saveExamples" class="nav-link text-white " aria-controls="saveExamples" role="button" aria-expanded="false">
+          <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">savings</i>
+          <span class="nav-link-text ms-2 ps-1">Tabungan</span>
+        </a>
+        <div class="collapse " id="saveExamples">
+          <ul class="nav ">
+            <li class="nav-item ">
+              <a class="nav-link text-white " href="<?= base_url('tabungan') ?>">
+                <span class="sidenav-mini-icon"> SS </span>
+                <span class="sidenav-normal  ms-2  ps-1"> Tabungan </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
       <li class="nav-item">
         <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link text-white " aria-controls="applicationsExamples" role="button" aria-expanded="false">
           <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">point_of_sale</i>
@@ -129,7 +145,7 @@
           <ul class="nav ">
             <li class="nav-item ">
 							<?php if ($this->session->login['role'] == 'admin' || $this->session->login['role'] == 'operator'): ?>
-              <a class="nav-link text-white " href="#">
+              <a class="nav-link text-white " href="<?= base_url('riwayat-transaksi') ?>">
                 <span class="sidenav-mini-icon"> RT </span>
                 <span class="sidenav-normal  ms-2  ps-1"> Riwayat Transaksi </span>
               </a>
