@@ -35,7 +35,7 @@ class Setor extends CI_Controller
 		$this->db->join('tbl_nasabah', 'tbl_transaksi.id_nasabah = tbl_nasabah.id_nasabah');
 		$data['arr_data'] = $this->db->get()->result();
 
-		$this->load->view('setor/index', $data);
+		$this->load->view('admin/setor/index', $data);
 	}
 	public function add()
 	{	
@@ -52,7 +52,7 @@ class Setor extends CI_Controller
 		$data['sampah'] = $this->m->Get_All('tbl_sampah', '*');
 		$data['nasabah'] = $this->m->Get_All('tbl_nasabah', '*');
 
-		$this->load->view('setor/add', $data);
+		$this->load->view('admin/setor/add', $data);
 	}
 	public function add_process()
 	{	
@@ -168,7 +168,7 @@ class Setor extends CI_Controller
 		$data['button'] = 'Tambah Setor';
 		$data['page_name'] = 'setor';
 
-		$this->load->view('setor/detail', $data);
+		$this->load->view('admin/setor/detail', $data);
 	}
 	public function delete()
 	{	

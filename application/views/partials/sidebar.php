@@ -46,7 +46,7 @@
         </a>
 				<?php endif ?>
 				<?php if ($this->session->login['role'] == 'nasabah'): ?>
-				<a class="nav-link text-white " href="<?= base_url('dashboard/nasabah') ?>">
+				<a class="nav-link text-white " href="<?= base_url('nasabah/dashboard') ?>">
           <i class="material-icons-round opacity-10">dashboard</i>
           <span class="nav-link-text ms-2 ps-1">Dashboards</span>
         </a>
@@ -135,7 +135,6 @@
           </ul>
         </div>
       </li>
-			<?php endif; ?>
       <li class="nav-item">
         <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link text-white active" aria-controls="ecommerceExamples" role="button" aria-expanded="false">
           <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">history</i>
@@ -144,22 +143,29 @@
         <div class="collapse  show " id="ecommerceExamples">
           <ul class="nav ">
             <li class="nav-item ">
-							<?php if ($this->session->login['role'] == 'admin' || $this->session->login['role'] == 'operator'): ?>
               <a class="nav-link text-white " href="<?= base_url('riwayat-transaksi') ?>">
                 <span class="sidenav-mini-icon"> RT </span>
                 <span class="sidenav-normal  ms-2  ps-1"> Riwayat Transaksi </span>
               </a>
-							<?php endif ?>
-							<?php if ($this->session->login['role'] == 'nasabah'): ?>
-							<a class="nav-link text-white " href="#">
-                <span class="sidenav-mini-icon"> RT </span>
-                <span class="sidenav-normal  ms-2  ps-1"> Riwayat Transaksi </span>
-              </a>
-							<?php endif ?>
             </li>
           </ul>
         </div>
       </li>
+			<?php endif; ?>
+			<?php if ($this->session->login['role'] == 'nasabah'): ?>
+			<li class="nav-item">
+				<a class="nav-link text-white " href="<?= base_url('nasabah/tabungan') ?>">
+					<i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">savings</i>
+          <span class="sidenav-normal  ms-2  ps-1"> Tabungan </span>
+        </a>
+      </li>
+			<li class="nav-item">	
+				<a class="nav-link text-white " href="<?= base_url('riwayat-transaksi/tabungan') ?>">
+					<i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">history</i>
+          <span class="sidenav-normal  ms-2  ps-1"> Riwayat Transaksi </span>
+        </a>
+			</li>
+			<?php endif ?>
     </ul>
   </div>
 </aside>

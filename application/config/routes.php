@@ -53,6 +53,11 @@ $route['default_controller'] = 'auth';
 $route['riwayat-transaksi'] = 'RiwayatTransaksi/index';
 $route['riwayat-transaksi/detail/(:num)'] = 'RiwayatTransaksi/detail/$1';
 
+// customer route
+$route['nasabah/dashboard'] = 'Dashboard/nasabah';
+$route['nasabah/tabungan'] = 'Tabungan/index_nasabah';
+$route['nasabah/riwayat-transaksi'] = 'RiwayatTransaksi/index_nasabah';
+$route['nasabah/riwayat-transaksi/detail'] = 'RiwayatTransaksi/detail_nasabah';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

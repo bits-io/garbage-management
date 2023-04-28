@@ -51,7 +51,7 @@
 								</div>
 								<div class="text-end pt-1">
 									<p class="text-sm mb-0 text-capitalize">Saldo</p>
-									<h4 class="mb-0">Rp100.000</h4>
+									<h4 class="mb-0">Rp<?= number_format($tabungan[0]->jumlah_tabungan, 0, ".", ".") ?></h4>
 								</div>
 							</div>
 							<hr class="dark horizontal my-0">
@@ -70,7 +70,7 @@
 								</div>
 								<div class="text-end pt-1">
 									<p class="text-sm mb-0 text-capitalize">Total Transaksi</p>
-									<h4 class="mb-0">20</h4>
+									<h4 class="mb-0"><?= number_format($total_transaksi, 0, ".", ".") ?></h4>
 								</div>
 							</div>
 							<hr class="dark horizontal my-0">
@@ -89,32 +89,13 @@
 								</div>
 								<div class="text-end pt-1">
 									<p class="text-sm mb-0 text-capitalize">Total Sampah</p>
-									<h4 class="mb-0">2kg</h4>
+									<h4 class="mb-0"><?= number_format($total_sampah[0]->berat_sampah, 0, ".", ".") ?>kg</h4>
 								</div>
 							</div>
 							<hr class="dark horizontal my-0">
 							<div class="card-footer p-3">
 								<p class="mb-0">
 									<!-- <span class="text-danger text-sm font-weight-bolder">-2%</span> than yesterday -->
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-3 col-sm-6">
-						<div class="card">
-							<div class="card-header p-3 pt-2">
-								<div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-									<i class="material-icons opacity-10">account_balance_wallet</i>
-								</div>
-								<div class="text-end pt-1">
-									<p class="text-sm mb-0 text-capitalize">Total Pemasukan</p>
-									<h4 class="mb-0">Rp.10.000.000</h4>
-								</div>
-							</div>
-							<hr class="dark horizontal my-0">
-							<div class="card-footer p-3">
-								<p class="mb-0">
-									<!-- <span class="text-success text-sm font-weight-bolder">+5% </span>than yesterday -->
 								</p>
 							</div>
 						</div>

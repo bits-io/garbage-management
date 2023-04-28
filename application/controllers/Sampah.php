@@ -36,7 +36,7 @@ class Sampah extends CI_Controller
 		$this->db->join('tbl_admin', 'tbl_sampah.id_admin = tbl_admin.id_admin', 'left');
 		$data['arr_data'] = $this->db->get()->result();
 
-		$this->load->view('sampah/index', $data);
+		$this->load->view('admin/sampah/index', $data);
 	}
 	public function add()
 	{	
@@ -51,7 +51,7 @@ class Sampah extends CI_Controller
 
 		$data['jenis_sampah'] = $this->m->Get_All('tbl_jenis_sampah', '*');
 
-		$this->load->view('sampah/add', $data);
+		$this->load->view('admin/sampah/add', $data);
 	}
 	public function add_process()
 	{	
@@ -112,7 +112,7 @@ class Sampah extends CI_Controller
 		$data['title'] = 'Data Sampah';
 		$data['button'] = 'Tambah Sampah';
 		$data['page_name'] = 'sampah';
-		$this->load->view('sampah/edit', $data);
+		$this->load->view('admin/sampah/edit', $data);
 	}
 	public function edit_process()
 	{	
@@ -177,7 +177,7 @@ class Sampah extends CI_Controller
 		$data['title'] = 'Data Sampah';
 		$data['button'] = 'Tambah Sampah';
 		$data['page_name'] = 'sampah';
-		$this->load->view('sampah/detail', $data);
+		$this->load->view('admin/sampah/detail', $data);
 	}
 	public function delete()
 	{	

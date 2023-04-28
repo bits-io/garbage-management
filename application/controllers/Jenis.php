@@ -30,7 +30,7 @@ class Jenis extends CI_Controller
 		$data['button'] = 'Tambah Jenis';
 		$data['page_name'] = 'jenis';
 		$data['arr_data'] = $this->m->Get_All('tbl_jenis_sampah', '*');
-		$this->load->view('jenis/index', $data);
+		$this->load->view('admin/jenis/index', $data);
 	}
 	public function add()
 	{	
@@ -42,7 +42,7 @@ class Jenis extends CI_Controller
 		$data['title'] = 'Data Jenis';
 		$data['button'] = 'Tambah Jenis';
 		$data['page_name'] = 'jenis';
-		$this->load->view('jenis/add', $data);
+		$this->load->view('admin/jenis/add', $data);
 	}
 	public function add_process()
 	{	
@@ -92,7 +92,7 @@ class Jenis extends CI_Controller
 		$data['title'] = 'Data Jenis';
 		$data['button'] = 'Tambah Jenis';
 		$data['page_name'] = 'jenis';
-		$this->load->view('jenis/edit', $data);
+		$this->load->view('admin/jenis/edit', $data);
 	}
 	public function edit_process()
 	{	
@@ -150,7 +150,7 @@ class Jenis extends CI_Controller
 		$data['title'] = 'Data Jenis';
 		$data['button'] = 'Tambah Jenis';
 		$data['page_name'] = 'jenis';
-		$this->load->view('jenis/detail', $data);
+		$this->load->view('admin/jenis/detail', $data);
 	}
 	public function delete()
 	{	

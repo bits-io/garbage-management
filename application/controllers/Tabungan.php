@@ -22,7 +22,6 @@ class Tabungan extends CI_Controller
 		parent::__construct();
 		$this->load->model('Models', 'm');
 		if(!$this->session->login) redirect('auth');
-		if($this->session->login['role'] == 'nasabah') redirect('auth');
 	}
 	public function index()
 	{	
@@ -34,7 +33,7 @@ class Tabungan extends CI_Controller
 		$this->db->join('tbl_tabungan', 'tbl_nasabah.id_nasabah = tbl_tabungan.id_nasabah');
 		$data['arr_data'] = $this->db->get()->result();
 
-		$this->load->view('tabungan/index', $data);
+		$this->load->view('admin/tabungan/index', $data);
 	}
 	public function add()
 	{	
@@ -48,7 +47,7 @@ class Tabungan extends CI_Controller
 		$data['title'] = 'Data Tabungan';
 		$data['button'] = 'Ambil Tabungan';
 		$data['page_name'] = 'tabungan';
-		$this->load->view('tabungan/add', $data);
+		$this->load->view('admin/tabungan/add', $data);
 	}
 	public function add_process()
 	{	
@@ -120,6 +119,18 @@ class Tabungan extends CI_Controller
 		$data['title'] = 'Data Tabungan';
 		$data['button'] = 'Ambil Tabungan';
 		$data['page_name'] = 'tabungan';
-		$this->load->view('tabungan/detail', $data);
+		$this->load->view('admin/tabungan/detail', $data);
+	}
+	public function index_nasabah()
+	{	
+		$data['title'] = 'Data Tabungan';
+		$data['button'] = 'Ambil Tabungan';
+		$data['page_name'] = 'tabungan';
+		$this->db->select('tbl_nasabah.*, tbl_tabungan.jumlah_tabungan, tbl_tabungan.created_at AS dibuat');
+		$this->db->from('tbl_nasabah');
+		$this->db->join('tbl_tabungan', 'tbl_nasabah.id_nasabah = tbl_tabungan.id_nasabah');
+		$data['arr_data'] = $this->db->get()->result();
+
+		$this->load->view('nasabah/tabungan/index', $data);
 	}
 }

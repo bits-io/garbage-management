@@ -53,7 +53,7 @@ class Auth extends CI_Controller
 
 				$this->session->set_userdata('login', $session);
 				$this->session->set_flashdata('success', '<strong>Login</strong> Berhasil!', 5);
-				redirect('dashboard/nasabah');
+				redirect('nasabah/dashboard');
 			} else {
 				redirect('auth?msg=gagal');
 			}

@@ -30,7 +30,7 @@ class Operator extends CI_Controller
 		$data['button'] = 'Tambah Operator';
 		$data['page_name'] = 'operator';
 		$data['arr_data'] = $this->m->Get_Where(['role' => 'operator'], 'tbl_admin');
-		$this->load->view('operator/index', $data);
+		$this->load->view('admin/operator/index', $data);
 	}
 	public function add()
 	{	
@@ -42,7 +42,7 @@ class Operator extends CI_Controller
 		$data['title'] = 'Data Operator';
 		$data['button'] = 'Tambah Operator';
 		$data['page_name'] = 'operator';
-		$this->load->view('operator/add', $data);
+		$this->load->view('admin/operator/add', $data);
 	}
 	public function add_process()
 	{	
@@ -107,7 +107,7 @@ class Operator extends CI_Controller
 		$data['title'] = 'Data Operator';
 		$data['button'] = 'Tambah Operator';
 		$data['page_name'] = 'operator';
-		$this->load->view('operator/edit', $data);
+		$this->load->view('admin/operator/edit', $data);
 	}
 	public function edit_process()
 	{	
@@ -181,7 +181,7 @@ class Operator extends CI_Controller
 		$data['title'] = 'Data Operator';
 		$data['button'] = 'Tambah Operator';
 		$data['page_name'] = 'operator';
-		$this->load->view('operator/detail', $data);
+		$this->load->view('admin/operator/detail', $data);
 	}
 	public function delete()
 	{	

@@ -30,7 +30,7 @@ class Nasabah extends CI_Controller
 		$data['button'] = 'Tambah Nasabah';
 		$data['page_name'] = 'nasabah';
 		$data['arr_data'] = $this->m->Get_All('tbl_nasabah', '*');
-		$this->load->view('nasabah/index', $data);
+		$this->load->view('admin/nasabah/index', $data);
 	}
 	public function add()
 	{	
@@ -42,7 +42,7 @@ class Nasabah extends CI_Controller
 		$data['title'] = 'Data Nasabah';
 		$data['button'] = 'Tambah Nasabah';
 		$data['page_name'] = 'nasabah';
-		$this->load->view('nasabah/add', $data);
+		$this->load->view('admin/nasabah/add', $data);
 	}
 	public function add_process()
 	{	
@@ -107,7 +107,7 @@ class Nasabah extends CI_Controller
 		$data['title'] = 'Data Nasabah';
 		$data['button'] = 'Tambah Nasabah';
 		$data['page_name'] = 'nasabah';
-		$this->load->view('nasabah/edit', $data);
+		$this->load->view('admin/nasabah/edit', $data);
 	}
 	public function edit_process()
 	{	
@@ -181,7 +181,7 @@ class Nasabah extends CI_Controller
 		$data['title'] = 'Data Nasabah';
 		$data['button'] = 'Tambah Nasabah';
 		$data['page_name'] = 'nasabah';
-		$this->load->view('nasabah/detail', $data);
+		$this->load->view('admin/nasabah/detail', $data);
 	}
 	public function delete()
 	{	
