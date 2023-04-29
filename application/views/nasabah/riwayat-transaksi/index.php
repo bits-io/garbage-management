@@ -58,8 +58,7 @@
                 <table class="table table-flush" id="datatable-search">
                   <thead class="thead-light">
                     <tr>
-                      <th>Kode Nasabah</th>
-                      <th>Nama Nasabah</th>
+                      <th>Tanggal</th>
 					  					<th>Total</th>
                       <th>Aksi</th>
                     </tr>
@@ -70,20 +69,14 @@
 						<tr>
 							<td>
 								<div class="d-flex align-items-center">
-									<p class="text-xs font-weight-normal ms-2 mb-0"><?= $data->kode_nasabah ?></p>
+									<p class="text-xs font-weight-normal ms-2 mb-0"><?= $data->created_at ?></p>
 								</div>
 							</td>
 							<td class="font-weight-normal">
-								<span class="my-2 text-xs"><?= $data->kode_nasabah ?></span>
+								<span class="my-2 text-xs">Rp<?= number_format($data->total, 0, ".", "."); ?></span>
 							</td>
 							<td class="font-weight-normal">
-								<span class="my-2 text-xs"><?= $data->nama ?></span>
-							</td>
-							<td class="font-weight-normal">
-								<span class="my-2 text-xs">Rp<?= number_format($data->total_transaksi, 0, ".", "."); ?></span>
-							</td>
-							<td class="font-weight-normal">
-								<a class="btn btn-info" href="<?= base_url(  $page_name.'/detail/' . $data->id_nasabah) ?>">
+								<a class="btn btn-info" href="<?= base_url( 'nasabah/'. $page_name.'/detail/' . $data->id_transaksi) ?>">
 									<i class="material-icons text-white">visibility</i>  Detail
 								</a>
 							</td>

@@ -52,41 +52,52 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="mb-0"><?php echo $title ?></h5>
+                <h5 class="mb-2"><?php echo $title ?></h5>
+								<div class="row">
+									<div class="col-md-3">
+										<p>Kode Nasabah : <?= $arr_data[0]->kode_nasabah ?></p>
+									</div>
+									<div class="col-md-3">
+										<p>Nama Nasabah : <?= $arr_data[0]->nama ?></p>
+									</div>
+									<div class="col-md-3">
+										<p>Total Tabungan : <?= $arr_data[0]->jumlah_tabungan ?></p>
+									</div>
+									<div class="col-md-3">
+										<p>Tanggal Dibuat : <?= $arr_data[0]->dibuat ?></p>
+									</div>
+								</div>
               </div>
               <div class="table-responsive">
                 <table class="table table-flush" id="datatable-search">
                   <thead class="thead-light">
                     <tr>
-                      <th>Kode Nasabah</th>
-                      <th>Nama</th>
-                      <th>Total Tabungan</th>
-                      <th>Tanggal Dibuat</th>
-                      <th>Aksi</th>
+                      <th>ID Detail Tabungan</th>
+                      <th>Tanggal</th>
+                      <th>Sisa Tabungan</th>
+                      <th>Nominal (Tambah/Kurang)</th>
+                      <th>Total</th>
                     </tr>
                   </thead>
                   <tbody>
                     
-					<?php foreach ($arr_data as $data): ?>
+					<?php foreach ($detail as $data): ?>
 						<tr>
 							<td>
 								<div class="d-flex align-items-center">
-									<p class="text-xs font-weight-normal ms-2 mb-0"><?= $data->kode_nasabah ?></p>
+									<p class="text-xs font-weight-normal ms-2 mb-0"><?= $data->id_detail_tabungan ?></p>
 								</div>
 							</td>
 							<td class="font-weight-normal">
-								<span class="my-2 text-xs"><?= $data->nama ?></span>
+								<span class="my-2 text-xs"><?= $data->tgl_transaksi ?></span>
 							</td>
 							<td class="font-weight-normal">
-								<span class="my-2 text-xs"><?= $data->jumlah_tabungan ?></span>
+								<span class="my-2 text-xs">Rp<?= number_format($data->sisa_tabungan, 0, ".", ".") ?></span>
+							<td class="font-weight-normal">
+								<span class="my-2 text-xs">Rp<?= number_format($data->nominal, 0, ".", ".") ?></span>
 							</td>
 							<td class="font-weight-normal">
-								<span class="my-2 text-xs"><?= $data->dibuat ?></span>
-							</td>
-							<td class="font-weight-normal">
-								<a class="btn btn-info" href="<?= base_url(  $page_name.'/detail/' . $data->id_nasabah) ?>">
-									<i class="material-icons text-white">visibility</i>  Detail
-								</a>
+								<span class="my-2 text-xs">Rp<?= number_format($data->sisa_tabungan + $data->nominal, 0, ".", ".") ?></span>
 							</td>
 						</tr>
 					<?php endforeach ?>

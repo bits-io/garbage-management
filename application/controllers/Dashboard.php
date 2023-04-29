@@ -13,6 +13,16 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		$data['title'] = 'Dashboard';
+
+		$data['berat_sampah'] = $this->db->select_sum('berat_sampah')->get('tbl_jual')->row()->berat_sampah;
+
+		$data['total_pemasukan'] = $this->db->select_sum('harga')->get('tbl_jual')->row()->harga;
+
+		$data['total_nasabah'] = $this->db->from('tbl_nasabah')->count_all_results();
+
+		$data['total_sampah'] = $this->db->from('tbl_sampah')->count_all_results();
+
+
 		$this->load->view('admin/dashboard/index', $data);
 	}
 	public function nasabah()

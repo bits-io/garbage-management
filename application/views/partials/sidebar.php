@@ -160,7 +160,7 @@
         </a>
       </li>
 			<li class="nav-item">	
-				<a class="nav-link text-white " href="<?= base_url('riwayat-transaksi/tabungan') ?>">
+				<a class="nav-link text-white " href="<?= base_url('nasabah/riwayat-transaksi') ?>">
 					<i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">history</i>
           <span class="sidenav-normal  ms-2  ps-1"> Riwayat Transaksi </span>
         </a>

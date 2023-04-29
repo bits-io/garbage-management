@@ -50,6 +50,12 @@
 								<li class="list-group-item border-0 ps-0 text-sm">
 								<strong class="text-dark">Nama Nasabah:</strong> &nbsp; <?= $ns[0]->nama ?>
 								</li>
+								<li class="list-group-item border-0 ps-0 text-sm">
+								<strong class="text-dark">ID Transaksi:</strong> &nbsp; <?= $arr_data[0]->id_transaksi ?>
+								</li>
+								<li class="list-group-item border-0 ps-0 text-sm">
+								<strong class="text-dark">Tanggal Transaksi:</strong> &nbsp; <?= $arr_data[0]->created_at ?>
+								</li>
 							</ul>
 							</div>
 							
@@ -62,10 +68,9 @@
 								<table class="table table-flush">
 								<thead class="thead-light">
 									<tr>
-									<th>ID Transaksi</th>
-									<th>Kode Nasabah</th>
-									<th>Nama Nasabah</th>
-									<th>Tanggal</th>
+									<th>Nama Sampah</th>
+									<th>Harga (/Kg)</th>
+									<th>Berat Sampah</th>
 									<th>Total</th>
 									</tr>
 								</thead>
@@ -73,19 +78,14 @@
 									
 									<?php foreach ($arr_data as $data): ?>
 										<tr>
-											<td>
-												<div class="d-flex align-items-center">
-													<p class="text-xs font-weight-normal ms-2 mb-0"><?= $data->id_transaksi ?></p>
-												</div>
+											<td class="font-weight-normal">
+												<span class="my-2 text-xs"><?= $data->nama_sampah ?></span>
 											</td>
 											<td class="font-weight-normal">
-												<span class="my-2 text-xs"><?= $data->kode_nasabah ?></span>
+												<span class="my-2 text-xs"><?= $data->harga ?></span>
 											</td>
 											<td class="font-weight-normal">
-												<span class="my-2 text-xs"><?= $data->nama ?></span>
-											</td>
-											<td class="font-weight-normal">
-												<span class="my-2 text-xs"><?= $data->created_at ?></span>
+												<span class="my-2 text-xs"><?= $data->berat_sampah ?></span>
 											</td>
 											<td class="font-weight-normal">
 												<span class="my-2 text-xs">Rp<?= number_format($data->total, 0, ".", "."); ?></span>
@@ -98,7 +98,7 @@
 							</div>
 						</div>
 					</div>
-					<a class="btn btn-secondary mt-3 mb-3 ms-2 mb-0 js-btn-next" href="<?= base_url($page_name) ?>" title="Next">Kembali</a>
+					<a class="btn btn-secondary mt-3 mb-3 ms-2 mb-0 js-btn-next" href="<?= base_url('nasabah/'.$page_name) ?>" title="Next">Kembali</a>
 				</div>
 			</div>
 		

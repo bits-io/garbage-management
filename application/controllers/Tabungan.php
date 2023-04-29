@@ -126,10 +126,22 @@ class Tabungan extends CI_Controller
 		$data['title'] = 'Data Tabungan';
 		$data['button'] = 'Ambil Tabungan';
 		$data['page_name'] = 'tabungan';
-		$this->db->select('tbl_nasabah.*, tbl_tabungan.jumlah_tabungan, tbl_tabungan.created_at AS dibuat');
-		$this->db->from('tbl_nasabah');
-		$this->db->join('tbl_tabungan', 'tbl_nasabah.id_nasabah = tbl_tabungan.id_nasabah');
-		$data['arr_data'] = $this->db->get()->result();
+		$id_nasabah = $this->session->login['id_user'];
+
+		$tabungan = $this->db;
+		$tabungan->select('tbl_nasabah.*, tbl_tabungan.jumlah_tabungan, tbl_tabungan.created_at AS dibuat');
+		$tabungan->from('tbl_nasabah');
+		$tabungan->join('tbl_tabungan', 'tbl_nasabah.id_nasabah = tbl_tabungan.id_nasabah');
+		$tabungan->where('tbl_tabungan.id_nasabah', $id_nasabah);
+		$data['arr_data'] = $tabungan->get()->result();
+
+		$detail = $this->db;
+		$detail->select('tbl_detail_tabungan.*, tbl_tabungan.*');
+		$detail->from('tbl_detail_tabungan');
+		$detail->join('tbl_tabungan', 'tbl_detail_tabungan.id_tabungan = tbl_tabungan.id_tabungan');
+		$detail->where('tbl_tabungan.id_nasabah', $id_nasabah);
+		$query = $detail->get();
+		$data['detail'] = $query->result();
 
 		$this->load->view('nasabah/tabungan/index', $data);
 	}

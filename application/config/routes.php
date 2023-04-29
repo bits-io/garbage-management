@@ -57,7 +57,7 @@ $route['riwayat-transaksi/detail/(:num)'] = 'RiwayatTransaksi/detail/$1';
 $route['nasabah/dashboard'] = 'Dashboard/nasabah';
 $route['nasabah/tabungan'] = 'Tabungan/index_nasabah';
 $route['nasabah/riwayat-transaksi'] = 'RiwayatTransaksi/index_nasabah';
-$route['nasabah/riwayat-transaksi/detail'] = 'RiwayatTransaksi/detail_nasabah';
+$route['nasabah/riwayat-transaksi/detail/(:num)'] = 'RiwayatTransaksi/detail_nasabah/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
