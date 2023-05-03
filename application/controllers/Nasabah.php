@@ -53,10 +53,17 @@ class Nasabah extends CI_Controller
 				redirect('dashboard');
 			}
 			$get_admin = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_admin');
-			$get_nasabah = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_nasabah');
+			if(count($get_admin) > 0){
+				if($get_admin[0]->username == $this->input->post('username')){
+					$this->session->unset_userdata('success');
+					$this->session->set_tempdata('error', 'Username telah digunakan', 5);
+					redirect('nasabah');
+				}
+			}
 			
-			if(count($get_admin) > 0 || count($get_nasabah) > 0){
-				if($get_admin[0]->username == $this->input->post('username') || $get_nasabah[0]->username == $this->input->post('username')){
+			$get_nasabah = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_nasabah');
+			if(count($get_nasabah) > 0){
+				if($get_nasabah[0]->username == $this->input->post('username')){
 					$this->session->unset_userdata('success');
 					$this->session->set_tempdata('error', 'Username telah digunakan', 5);
 					redirect('nasabah');
@@ -132,14 +139,21 @@ class Nasabah extends CI_Controller
 			}
 
 			$get_admin = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_admin');
-			$get_nasabah = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_nasabah');
-
-			if (count($get_admin) > 1 || count($get_nasabah) > 1){
-			if($get_admin[0]->username == $this->input->post('username') || $get_nasabah[0]->username == $this->input->post('username')){
-				$this->session->unset_userdata('success');
-				$this->session->set_tempdata('error', 'Username telah digunakan', 5);
-				redirect('nasabah');
+			if(count($get_admin) > 0){
+				if($get_admin[0]->username == $this->input->post('username')){
+					$this->session->unset_userdata('success');
+					$this->session->set_tempdata('error', 'Username telah digunakan', 5);
+					redirect('nasabah');
+				}
 			}
+			
+			$get_nasabah = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_nasabah');
+			if(count($get_nasabah) > 0){
+				if($get_nasabah[0]->username == $this->input->post('username')){
+					$this->session->unset_userdata('success');
+					$this->session->set_tempdata('error', 'Username telah digunakan', 5);
+					redirect('nasabah');
+				}
 			}
 	
 			$updatedAt = Date('Y-m-d h:i:s');
