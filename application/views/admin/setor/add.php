@@ -252,7 +252,8 @@
 					id_nasabah: id_nasabah,
 					keranjang: keranjang
 				},
-                success: function() {
+                success: function(response) {
+					console.log(response);
                     window.location = "<?= base_url($page_name) ?>";
                 }
             });

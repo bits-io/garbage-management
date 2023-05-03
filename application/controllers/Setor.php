@@ -73,7 +73,7 @@ class Setor extends CI_Controller
 				$total += $item['jumlah_harga'];
 			}
 
-			if (count($this->m->Get_Where(['id_nasabah' => $id], 'tbl_tabungan')) > 0) {
+			if (count($this->m->Get_Where(['id_nasabah' => $id_nasabah], 'tbl_tabungan')) == 0) {
 				$data_tabungan = array(
 					'id_nasabah' => $id_nasabah,
 					'jumlah_tabungan' => 0,
