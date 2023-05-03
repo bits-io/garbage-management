@@ -39,10 +39,13 @@ class Tabungan extends CI_Controller
 	{	
 		if ($this->session->login['role'] == 'nasabah'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
-		$data['ns'] = $this->m->Get_All('tbl_nasabah', '*');
+		$this->db->select('tbl_tabungan.*, tbl_nasabah.nama, tbl_nasabah.kode_nasabah, tbl_nasabah.id_nasabah');
+		$this->db->from('tbl_nasabah');
+		$this->db->join('tbl_tabungan', 'tbl_nasabah.id_nasabah = tbl_tabungan.id_nasabah', 'left');
+		$data['ns'] = $this->db->get()->result();
 
 		$data['title'] = 'Data Tabungan';
 		$data['button'] = 'Ambil Tabungan';
@@ -54,41 +57,47 @@ class Tabungan extends CI_Controller
 		try {
 			if ($this->session->login['role'] == 'nasabah'){
 				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+				$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 				redirect('dashboard');
-			}
-			$get_admin = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_admin');
-			$get_nasabah = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_nasabah');
-			if($get_admin[0]->username == $this->input->post('username') || $get_nasabah[0]->username == $this->input->post('username')){
-				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Username telah digunakan', 5);
-				redirect('tabungan');
 			}
 	
 			$createdAt = Date('Y-m-d h:i:s');
 			$updateAt = $createdAt;
+
+			$id_nasabah = $this->input->post('id_nasabah');
+			$nominal_ditarik = $this->input->post('nominal_ditarik');
+			$jumlah_tabungan_sekarang = $this->input->post('jumlah_tabungan_sekarang');
+			$jumlah_tabungan_ditarik = $this->input->post('jumlah_tabungan_ditarik');
 	
-			$kodeNasabah = 'NSB-'.Date('Y-his');
-			
-			$data = [
-				'kode_nasabah' => $kodeNasabah,
-				'nama' => $this->input->post('nama'),
-				'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-				'tgl_lahir' => $this->input->post('tgl_lahir'),
-				'no_telepon' => $this->input->post('no_telepon'),
-				'username' => $this->input->post('username'),
-				'password' => $this->input->post('password'),
-				'status_pengguna' => 'nasabah',
-				'created_at' => $createdAt,
+			$tabungan = $this->m->Get_Where(['id_nasabah'=>$id_nasabah], 'tbl_tabungan');
+
+			if ($jumlah_tabungan_sekarang < $nominal_ditarik) {
+				$this->session->unset_userdata('success');
+				$this->session->set_tempdata('error', 'Nominal terlalu besar dibanding jumlah tabungan!',5);
+			}
+
+			$data_tabungan = [
+				'jumlah_tabungan' => $jumlah_tabungan_sekarang - $nominal_ditarik,
 				'updated_at' => $updateAt
 			];
-	
-			$this->m->Save($data, 'tbl_nasabah');
-	
+
+			$data_detail_tabungan = [
+				'id_tabungan' => $tabungan[0]->id_tabungan,
+				'sisa_tabungan' => $tabungan[0]->jumlah_tabungan,
+				'nominal' => - $nominal_ditarik,
+				'tgl_transaksi' => $createdAt,
+				'created_at' => $createdAt,
+				'updated_at' => $updateAt,
+			];
+			
+			$this->m->Update(['id_tabungan' => $tabungan[0]->id_tabungan], $data_tabungan, 'tbl_tabungan');
+			$this->m->Save($data_detail_tabungan, 'tbl_detail_tabungan');
+			$this->session->set_tempdata('success', 'Tambah data berhasil!',5);
+
 			redirect('tabungan');
 		} catch (\Throwable $th) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', $th->getMessage(), 5);
+			$this->session->set_tempdata('error', $th->getMessage(), 5);
 			redirect('tabungan');
 		}
 	}
@@ -97,13 +106,13 @@ class Tabungan extends CI_Controller
 		$id = intval($this->uri->segment(3));
 		if ($this->session->login['role'] == 'nasabah'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 
 		if (!$this->m->Get_Where(['id_nasabah' => $id], 'tbl_nasabah')) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
 			redirect('tabungan');
 		}
 

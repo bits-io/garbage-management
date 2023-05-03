@@ -30,54 +30,44 @@
 										</div>
 									</div>
 									<div class="card-body">
-										<form action="<?= base_url($page_name.'/add_process') ?>" method="post" class="multisteps-form__form" style="height: 330px;">
+										<form method="post" class="multisteps-form__form" style="height: 330px;">
 											<div class="multisteps-form__panel border-radius-xl bg-white js-active" data-animation="FadeIn">
-												<h5 class="font-weight-bolder mb-1">Tambah <?= $title ?></h5>
+												<h5 class="font-weight-bolder mb-1"><?= $button ?></h5>
 												<div class="multisteps-form__content">
 													<div class="row mt-3">
-														<div class="col-12 col-sm-6">
-															<div class="input-group input-group-static">
-																<label class="">Nama</label>
-																<input required name="nama" placeholder="Nama" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
-														</div>
 														<div class="col-12 col-sm-6 mt-3 mt-sm-0">
 															<div class="input-group input-group-static">
-																<label for="jenisKelaminFormControl" class="">Jenis Kelamin</label>
-																<select required name="jenis_kelamin" class="form-control" id="jenisKelaminFormControl">
-																	<option value="">Pilih jenis kelamin</option>
-																	<option value="Laki-laki">Laki-laki</option>
-																	<option value="Perempuan">Perempuan</option>
+																<label for="nasabahFormControl" class="">Nasabah</label>
+																<select required name="id_nasabah" class="form-control" id="nasabahFormControl" onchange="getNasabah()">
+																	<option value="">Pilih Nasabah</option>
+																	<?php foreach($ns as $data): ?>
+																		<option value="<?= $data->id_nasabah ?>" data-tabungan="<?= $data->jumlah_tabungan ?>"><?= $data->kode_nasabah ?> | <?= $data->nama ?></option>
+																	<?php endforeach ?>
 																</select>	
 															</div>
 														</div>
+														<div class="col-12 col-sm-6">
+															<div class="input-group input-group-static">
+																<label class="">Total Tabungan Sekarang</label>
+																<input readonly class="multisteps-form__input form-control"  type="number" onfocus="focused(this)" onfocusout="defocused(this)" id="jumlah-tabungan-sekarang"> </div>
+														</div>
+														
 													</div>
 													<div class="row mt-3">
 														<div class="col-12 col-sm-6">
 															<div class="input-group input-group-static">
-																<label class="">Tanggal Lahir</label>
-																<input required name="tgl_lahir" placeholder="Tanggal Lahir" class="multisteps-form__input form-control" type="date" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
+																<label class="">Nominal Tarik Uang</label>
+																<input required name="tarik_uang" class="multisteps-form__input form-control" type="number" onfocus="focused(this)" onfocusout="defocused(this)" id="nominal-ditarik" oninput="updateTotalHarga()"> </div>
 														</div>
 														<div class="col-12 col-sm-6 mt-3 mt-sm-0">
 															<div class="input-group input-group-static">
-																<label class="">No Telepon</label>
-																<input required name="no_telepon" placeholder="No Telepon" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
-														</div>
-													</div>
-													<div class="row mt-3">
-														<div class="col-12 col-sm-6">
-															<div class="input-group input-group-static">
-																<label class="">Username</label>
-																<input required name="username" placeholder="Username" class="multisteps-form__input form-control" type="text" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
-														</div>
-														<div class="col-12 col-sm-6 mt-3 mt-sm-0">
-															<div class="input-group input-group-static">
-																<label class="">Password</label>
-																<input required name="password" placeholder="Password" class="multisteps-form__input form-control" type="password" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
+																<label class="">Total Tabungan Setelah Ditarik</label>
+																<input readonly class="multisteps-form__input form-control" type="number" onfocus="focused(this)" onfocusout="defocused(this)" id="jumlah-tabungan-ditarik"> </div>
 														</div>
 													</div>
 													<div class="button-row d-flex justify-content-end mt-4">
-														<a class="btn btn-outline-secondary ms-2 mb-0 js-btn-next" href="<?= base_url($page_name) ?>" title="Next">Kembali</a>
-														<button class="btn bg-gradient-dark ms-2 mb-0 js-btn-next" type="submit" title="Next">Simpan</button>
+														<a class="btn btn-outline-secondary ms-2 mb-0 js-btn-next" href="<?= base_url($page_name) ?>" title="number">Kembali</a>
+														<button class="btn bg-gradient-dark ms-2 mb-0 js-btn-next" type="button" title="Next" onclick="addProcess()">Simpan</button>
 													</div>
 												</div>
 											</div>
@@ -118,6 +108,57 @@
         </div>
       </div>
     </div>
+
+	<script>
+		function getNasabah() {
+			var selectedOption = $('#nasabahFormControl').find(":selected");
+			var tabungan = selectedOption.data('tabungan');
+			console.log(tabungan);
+			if (!tabungan) {
+				alert('Jumlah tabungan tidak tersedia!');
+				$('#nasabahFormControl').val('');
+			} else {
+				$('#jumlah-tabungan-sekarang').val(tabungan);
+				$('#jumlah-tabungan-ditarik').val(0);
+				$('#nominal-ditarik').val(0);
+			}
+		};
+		function updateTotalHarga() {
+			var tabungan_sekarang = parseInt($('#jumlah-tabungan-sekarang').val());
+			var nominal_ditarik = parseInt($('#nominal-ditarik').val());
+
+			var tabungan_ditarik = tabungan_sekarang - nominal_ditarik;
+
+			if (tabungan_ditarik < 0) {
+				alert('Nominal terlalu banyak');
+				$('#nominal-ditarik').val(0);
+				$('#jumlah-tabungan-ditarik').val(tabungan_sekarang);
+			} else {
+				$('#jumlah-tabungan-ditarik').val(tabungan_ditarik);
+			}
+		}
+		function addProcess() {
+			
+			const data = {
+				jumlah_tabungan_sekarang: $('#jumlah-tabungan-sekarang').val(),
+				jumlah_tabungan_ditarik: $('#jumlah-tabungan-ditarik').val(),
+				nominal_ditarik: $('#nominal-ditarik').val(),
+				id_nasabah: $('select[name="id_nasabah"]').val(),
+			}
+			console.log(data);
+
+
+			$.ajax({
+                url: "<?= base_url($page_name.'/add_process') ?>",
+                method: "POST",
+                data: data,
+                success: function() {
+                    window.location = "<?= base_url($page_name) ?>";
+                }
+            });
+		}
+	</script>
+
     <?php $this->load->view('partials/js.php') ?>
   </body>
 </html>

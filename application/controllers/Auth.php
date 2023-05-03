@@ -32,7 +32,7 @@ class Auth extends CI_Controller
 				];
 
 				$this->session->set_userdata('login', $session);
-				$this->session->set_flashdata('success', '<strong>Login</strong> Berhasil!', 5);
+				$this->session->set_tempdata('success', '<strong>Login</strong> Berhasil!', 5);
 				redirect('dashboard');
 			} else {
 				redirect('auth?msg=gagal');
@@ -52,7 +52,7 @@ class Auth extends CI_Controller
 				];
 
 				$this->session->set_userdata('login', $session);
-				$this->session->set_flashdata('success', '<strong>Login</strong> Berhasil!', 5);
+				$this->session->set_tempdata('success', '<strong>Login</strong> Berhasil!', 5);
 				redirect('nasabah/dashboard');
 			} else {
 				redirect('auth?msg=gagal');

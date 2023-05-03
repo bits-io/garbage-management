@@ -41,7 +41,7 @@ class Setor extends CI_Controller
 	{	
 		if ($this->session->login['role'] == 'nasabah'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 		$data['title'] = 'Data Setor';
@@ -59,7 +59,7 @@ class Setor extends CI_Controller
 		try {
 			if ($this->session->login['role'] == 'nasabah'){
 				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+				$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 				redirect('dashboard');
 			}
 			$id_nasabah = $this->input->post('id_nasabah');
@@ -123,12 +123,12 @@ class Setor extends CI_Controller
 
 
 			$this->session->unset_userdata('error');
-			$this->session->set_flashdata('success', 'Data berhasil ditambah!');
+			$this->session->set_tempdata('success', 'Data berhasil ditambah!',5);
 	
 			redirect('setor');
 		} catch (\Throwable $th) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', $th->getMessage(), 5);
+			$this->session->set_tempdata('error', $th->getMessage(), 5);
 			redirect('setor');
 		}
 	}
@@ -138,13 +138,13 @@ class Setor extends CI_Controller
 		$id = intval($this->uri->segment(3));
 		if ($this->session->login['role'] == 'nasabah'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 
 		if (!$this->m->Get_Where(['id_transaksi' => $id], 'tbl_transaksi')) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
 			redirect('setor');
 		}
 
@@ -175,13 +175,13 @@ class Setor extends CI_Controller
 		$id = intval($this->uri->segment(3));
 		if ($this->session->login['role'] == 'nasabah'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 
 		if (!$this->m->Get_Where(['id_transaksi' => $id], 'tbl_transaksi')) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
 			redirect('setor');
 		}
 		$tr = $this->m->Get_Where(['id_transaksi' => $id], 'tbl_transaksi');
@@ -203,7 +203,7 @@ class Setor extends CI_Controller
 		$data['page_name'] = 'setor';
 
 		$this->session->unset_userdata('success');
-		$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+		$this->session->set_tempdata('success', 'Data berhasil dihapus!',5);
 
 		redirect('setor');
 	}

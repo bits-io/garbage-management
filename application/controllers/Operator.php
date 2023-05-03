@@ -36,7 +36,7 @@ class Operator extends CI_Controller
 	{	
 		if ($this->session->login['role'] != 'admin'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 		$data['title'] = 'Data Operator';
@@ -49,14 +49,14 @@ class Operator extends CI_Controller
 		try {
 			if ($this->session->login['role'] != 'admin'){
 				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+				$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 				redirect('dashboard');
 			}
 			$get_admin = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_admin');
 			$get_nasabah = $this->m->Get_Where(['username' => $this->input->post('username')], 'tbl_nasabah');
 			if($get_admin[0]->username == $this->input->post('username') || $get_nasabah[0]->username == $this->input->post('username')){
 				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Username telah digunakan', 5);
+				$this->session->set_tempdata('error', 'Username telah digunakan', 5);
 				redirect('operator');
 			}
 	
@@ -83,7 +83,7 @@ class Operator extends CI_Controller
 			redirect('operator');
 		} catch (\Throwable $th) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', $th->getMessage(), 5);
+			$this->session->set_tempdata('error', $th->getMessage(), 5);
 			redirect('operator');
 		}
 	}
@@ -92,13 +92,13 @@ class Operator extends CI_Controller
 		$id = intval($this->uri->segment(3));
 		if ($this->session->login['role'] != 'admin'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 
 		if (!$this->m->Get_Where(['id_admin' => $id], 'tbl_admin')) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
 			redirect('operator');
 		}
 
@@ -116,13 +116,13 @@ class Operator extends CI_Controller
 
 			if ($this->session->login['role'] != 'admin'){
 				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!', 5);
+				$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!', 5);
 				redirect('dashboard');
 			}
 
 			if (!$this->m->Get_Where(['id_admin' => $id], 'tbl_admin')) {
 				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Data tidak ditemukan!', 5);
+				$this->session->set_tempdata('error', 'Data tidak ditemukan!', 5);
 				redirect('operator');
 			}
 
@@ -132,7 +132,7 @@ class Operator extends CI_Controller
 			if (count($get_admin) > 1 || count($get_nasabah) > 1){
 			if($get_admin[0]->username == $this->input->post('username') || $get_nasabah[0]->username == $this->input->post('username')){
 				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Username telah digunakan', 5);
+				$this->session->set_tempdata('error', 'Username telah digunakan', 5);
 				redirect('operator');
 			}
 			}
@@ -153,11 +153,11 @@ class Operator extends CI_Controller
 			
 			
 			$this->session->unset_userdata('error');
-			$this->session->set_flashdata('success', 'Data berhasil diubah!');
+			$this->session->set_tempdata('success', 'Data berhasil diubah!',5);
 			redirect('operator');
 		} catch (\Throwable $th) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', $th->getMessage(), 5);
+			$this->session->set_tempdata('error', $th->getMessage(), 5);
 			redirect('operator');
 		}
 	}
@@ -166,13 +166,13 @@ class Operator extends CI_Controller
 		$id = intval($this->uri->segment(3));
 		if ($this->session->login['role'] != 'admin'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 
 		if (!$this->m->Get_Where(['id_admin' => $id], 'tbl_admin')) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
 			redirect('operator');
 		}
 
@@ -188,13 +188,13 @@ class Operator extends CI_Controller
 		$id = intval($this->uri->segment(3));
 		if ($this->session->login['role'] != 'admin'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 
 		if (!$this->m->Get_Where(['id_admin' => $id], 'tbl_admin')) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
 			redirect('operator');
 		}
 
@@ -205,7 +205,7 @@ class Operator extends CI_Controller
 		$data['page_name'] = 'operator';
 
 		$this->session->unset_userdata('success');
-		$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+		$this->session->set_tempdata('success', 'Data berhasil dihapus!',5);
 
 		redirect('operator');
 	}

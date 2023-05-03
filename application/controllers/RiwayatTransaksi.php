@@ -42,13 +42,13 @@ class RiwayatTransaksi extends CI_Controller
 		$id = intval($this->uri->segment(3));
 		if ($this->session->login['role'] == 'nasabah'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 
 		if (!$this->m->Get_Where(['id_nasabah' => $id], 'tbl_transaksi')) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
 			redirect('riwayat-transaksi');
 		}
 
@@ -67,6 +67,49 @@ class RiwayatTransaksi extends CI_Controller
 
 		$this->load->view('admin/riwayat-transaksi/detail', $data);
 	}
+
+	public function detailTransaksi($id_nasabah, $id_transaksi)
+	{
+		$id = intval($this->uri->segment(3));
+		if ($this->session->login['role'] == 'nasabah'){
+			$this->session->unset_userdata('success');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
+			redirect('dashboard');
+		}
+
+		if (!$this->m->Get_Where(['id_nasabah' => $id], 'tbl_transaksi')) {
+			$this->session->unset_userdata('success');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
+			redirect('riwayat-transaksi');
+		}
+
+		$data['ns'] = $this->m->Get_Where(['id_nasabah' => $id], 'tbl_nasabah');
+		
+		$tr = $this->db;
+		$tr->select('*');
+		$tr->from('tbl_jual');
+		$tr->join('tbl_transaksi', 'tbl_transaksi.id_transaksi = tbl_jual.id_transaksi');
+		$tr->join('tbl_nasabah', 'tbl_nasabah.id_nasabah = tbl_transaksi.id_nasabah');
+		$tr->join('tbl_sampah', 'tbl_sampah.id_sampah = tbl_jual.id_sampah');
+		$tr->where('tbl_jual.id_transaksi', $id_transaksi);
+		$tr->where('tbl_nasabah.id_nasabah', $id_nasabah);
+		$query = $tr->get();
+		if ($query->num_rows() < 0) {
+			$this->session->unset_userdata('success');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
+			redirect('riwayat-transaksi');
+		}
+		$data['arr_data'] = $query->result();
+
+		$data['title'] = 'Data Riwayat Transaksi';
+		$data['button'] = 'Tambah Riwayat Transaksi';
+		$data['page_name'] = 'riwayat-transaksi';
+
+		$this->load->view('admin/riwayat-transaksi/detail-transaksi', $data);
+	}
+
+
+
 	public function index_nasabah()
 	{	
 		$id_user = $this->session->login['id_user'];
@@ -88,7 +131,7 @@ class RiwayatTransaksi extends CI_Controller
 
 		if (!$this->m->Get_Where(['id_nasabah' => $id_user], 'tbl_transaksi')) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
 			redirect('nasabah/riwayat-transaksi');
 		}
 

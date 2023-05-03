@@ -36,7 +36,7 @@ class Jenis extends CI_Controller
 	{	
 		if ($this->session->login['role'] == 'nasabah'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 		$data['title'] = 'Data Jenis';
@@ -49,7 +49,7 @@ class Jenis extends CI_Controller
 		try {
 			if ($this->session->login['role'] == 'nasabah'){
 				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+				$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 				redirect('dashboard');
 			}
 			$createdAt = Date('Y-m-d h:i:s');
@@ -63,12 +63,12 @@ class Jenis extends CI_Controller
 	
 			$this->m->Save($data, 'tbl_jenis_sampah');
 			$this->session->unset_userdata('error');
-			$this->session->set_flashdata('success', 'Tambah data berhasil!');
+			$this->session->set_tempdata('success', 'Tambah data berhasil!',5);
 	
 			redirect('jenis');
 		} catch (\Throwable $th) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', $th->getMessage(), 5);
+			$this->session->set_tempdata('error', $th->getMessage(), 5);
 			redirect('jenis');
 		}
 	}
@@ -77,13 +77,13 @@ class Jenis extends CI_Controller
 		$id = intval($this->uri->segment(3));
 		if ($this->session->login['role'] == 'nasabah'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Edit data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Edit data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 
 		if (!$this->m->Get_Where(['id_jenis' => $id], 'tbl_jenis_sampah')) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
 			redirect('jenis');
 		}
 
@@ -101,13 +101,13 @@ class Jenis extends CI_Controller
 
 			if ($this->session->login['role'] == 'nasabah'){
 				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Edit data hanya untuk admin!', 5);
+				$this->session->set_tempdata('error', 'Edit data hanya untuk admin!', 5);
 				redirect('dashboard');
 			}
 
 			if (!$this->m->Get_Where(['id_jenis' => $id], 'tbl_jenis_sampah')) {
 				$this->session->unset_userdata('success');
-				$this->session->set_flashdata('error', 'Data tidak ditemukan!', 5);
+				$this->session->set_tempdata('error', 'Data tidak ditemukan!', 5);
 				redirect('jenis');
 			}
 	
@@ -122,11 +122,11 @@ class Jenis extends CI_Controller
 			
 			
 			$this->session->unset_userdata('error');
-			$this->session->set_flashdata('success', 'Data berhasil diubah!');
+			$this->session->set_tempdata('success', 'Data berhasil diubah!',5);
 			redirect('jenis');
 		} catch (\Throwable $th) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', $th->getMessage(), 5);
+			$this->session->set_tempdata('error', $th->getMessage(), 5);
 			redirect('jenis');
 		}
 	}
@@ -135,13 +135,13 @@ class Jenis extends CI_Controller
 		$id = intval($this->uri->segment(3));
 		if ($this->session->login['role'] == 'nasabah'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
 			redirect('dashboard');
 		}
 
 		if (!$this->m->Get_Where(['id_jenis' => $id], 'tbl_jenis_sampah')) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
 			redirect('jenis');
 		}
 
@@ -157,13 +157,13 @@ class Jenis extends CI_Controller
 		$id = intval($this->uri->segment(3));
 		if ($this->session->login['role'] == 'nasabah'){
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Tambah data hanya untuk admin!');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!', 5);
 			redirect('dashboard');
 		}
 
 		if (!$this->m->Get_Where(['id_jenis' => $id], 'tbl_jenis_sampah')) {
 			$this->session->unset_userdata('success');
-			$this->session->set_flashdata('error', 'Data tidak ditemukan!');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!', 5);
 			redirect('jenis');
 		}
 
@@ -174,7 +174,7 @@ class Jenis extends CI_Controller
 		$data['page_name'] = 'jenis';
 
 		$this->session->unset_userdata('success');
-		$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+		$this->session->set_tempdata('success', 'Data berhasil dihapus!', 5);
 
 		redirect('jenis');
 	}

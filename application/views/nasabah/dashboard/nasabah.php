@@ -16,31 +16,7 @@
       
 			<div class="container-fluid py-4">
 				<div class="row mb-5">
-					<?php if ($this->session->flashdata('success')) : ?>
-						<div class="alert alert-success alert-dismissible text-white fade show" role="alert">
-								<span class="alert-icon align-middle">
-									<span class="material-icons text-md">
-									thumb_up_off_alt
-									</span>
-								</span>
-								<span class="alert-text"> <?= $this->session->flashdata('success') ?>!</span>
-								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-								</button>
-						</div>
-					<?php elseif($this->session->flashdata('error')) : ?>
-						<div class="alert alert-danger alert-dismissible text-white fade show" role="alert">
-								<span class="alert-icon align-middle">
-									<span class="material-icons text-md">
-									thumb_down_off_alt
-									</span>
-								</span>
-								<span class="alert-text"> <?= $this->session->flashdata('error') ?>!</span>
-								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-								</button>
-						</div>
-					<?php endif; ?>
+					<?php $this->load->view('partials/notification.php') ?>
 				</div>
 				<div class="row">
 					<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
