@@ -17,7 +17,7 @@
       <div class="container-fluid py-4">
         <div class="d-sm-flex justify-content-between">
           <div>
-					<a href="<?= base_url($page_name.'/add') ?>" class="btn btn-icon bg-gradient-primary"> <?php echo $button ?> </a>
+					
           </div>
             <button class="btn btn-icon btn-outline-dark ms-2 export" data-type="csv" type="button">
               <i class="material-icons text-xs position-relative">archive</i> Export CSV </button>
