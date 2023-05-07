@@ -207,5 +207,7 @@ class Setor extends CI_Controller
 
 		redirect('setor');
 	}
+
+	
 }
 

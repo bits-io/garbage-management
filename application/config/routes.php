@@ -53,6 +53,8 @@ $route['default_controller'] = 'auth';
 $route['riwayat-transaksi'] = 'RiwayatTransaksi/index';
 $route['riwayat-transaksi/detail/(:num)'] = 'RiwayatTransaksi/detail/$1';
 
+$route['laporan/tabungan'] = 'Tabungan/laporanTabungan';
+
 // customer route
 $route['nasabah/dashboard'] = 'Dashboard/nasabah';
 $route['nasabah/tabungan'] = 'Tabungan/index_nasabah';

@@ -3,13 +3,13 @@
  * CodeIgniter DomPDF Library
  *
  * Generate PDF's from HTML in CodeIgniter
- *
+ *  
  */
 use Dompdf\Dompdf;
 class Pdf extends Dompdf{
     /**
      * PDF filename
-     * @var String
+     * @var String//773333333333333wwww344444444444444444444444444444444444444444444431
      */
     public $filename;
     public function __construct(){

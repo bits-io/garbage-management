@@ -154,4 +154,22 @@ class Tabungan extends CI_Controller
 
 		$this->load->view('nasabah/tabungan/index', $data);
 	}
+
+	public function laporanTabungan()
+	{
+		$data['title'] = 'Data Tabungan';
+		$data['button'] = 'Ambil Tabungan';
+		$data['page_name'] = 'laporan/tabungan';
+
+		$data['dari'] = date('Y-m-01');
+		$data['sampai'] = date('Y-m-d', strtotime($data['dari'] . ' + 1 months'));
+
+		$data['ns'] = $this->m->Get_All('tbl_nasabah', '*');
+
+		$this->load->view('admin/laporan/laporan-tabungan', $data);
+	}
+	public function cetakLaporanTabungan()
+	{
+		$data['ns'] = $this->m->Get_Where(['id_nasabah' => $this->input->post('id_nasabah')], 'tbl_nasabah');
+	}
 }
