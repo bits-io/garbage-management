@@ -50,9 +50,9 @@
                     <tr>
                       <th>ID Detail Tabungan</th>
                       <th>Tanggal</th>
-                      <th>Sisa Tabungan</th>
-                      <th>Nominal (Tambah/Kurang)</th>
-                      <th>Total</th>
+                      <th>Masuk</th>
+                      <th>Keluar</th>
+                      <th>Jumlah Sisa</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -68,9 +68,9 @@
 								<span class="my-2 text-xs"><?= $data->tgl_transaksi ?></span>
 							</td>
 							<td class="font-weight-normal">
-								<span class="my-2 text-xs">Rp<?= number_format($data->sisa_tabungan, 0, ".", ".") ?></span>
+								<span class="my-2 text-xs">Rp<?= number_format($data->nominal >= 0 ? $data->nominal : 0, 0, ".", ".") ?></span>
 							<td class="font-weight-normal">
-								<span class="my-2 text-xs">Rp<?= number_format($data->nominal, 0, ".", ".") ?></span>
+								<span class="my-2 text-xs">Rp<?= number_format($data->nominal < 0 ? $data->nominal : 0, 0, ".", ".") ?></span>
 							</td>
 							<td class="font-weight-normal">
 								<span class="my-2 text-xs">Rp<?= number_format($data->sisa_tabungan + $data->nominal, 0, ".", ".") ?></span>

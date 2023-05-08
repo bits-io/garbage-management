@@ -170,6 +170,21 @@ class Tabungan extends CI_Controller
 	}
 	public function cetakLaporanTabungan()
 	{
-		$data['ns'] = $this->m->Get_Where(['id_nasabah' => $this->input->post('id_nasabah')], 'tbl_nasabah');
+		$id_nasabah = $this->input->get('id_nasabah');
+		$data['ns'] = $this->m->Get_Where(['id_nasabah' => $id_nasabah], 'tbl_nasabah');
+
+		$data['ns'] = $this->m->Get_All('tbl_nasabah', '*');
+
+		$this->db->select('t.id_tabungan, t.id_nasabah, t.jumlah_tabungan, t.created_at as tabungan_created, t.updated_at as tabungan_updated, d.id_detail_tabungan, d.id_tabungan, d.tgl_transaksi, d.sisa_tabungan, d.nominal, d.created_at as detail_created, d.updated_at as detail_updated');
+		$this->db->from('tbl_tabungan t');
+		$this->db->join('tbl_detail_tabungan d', 't.id_tabungan = d.id_tabungan');
+		$this->db->where('t.id_nasabah', $id_nasabah);
+		$query = $this->db->get();
+		$data['arr_data'] = $query->result();
+
+		$data['dari'] = $_GET['dari'];
+		$data['sampai'] = $_GET['sampai'];
+
+		$this->load->view('admin/laporan/cetakTabungan', $data);
 	}
 }

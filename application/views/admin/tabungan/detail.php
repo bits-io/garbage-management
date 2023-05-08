@@ -64,9 +64,9 @@
 									<tr>
 									<th>ID Detail</th>
 									<th>Tanggal</th>
-									<th>Sisa Tabungan</th>
-									<th>Nominal</th>
-									<th>Jumlah Tabungan</th>
+									<th>Masuk</th>
+									<th>Keluar</th>
+									<th>Jumlah Sisa</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -81,13 +81,13 @@
 												<span class="my-2 text-xs"><?= $data->created_at ?></span>
 											</td>
 											<td class="font-weight-normal">
-												<span class="my-2 text-xs">Rp<?= number_format($data->sisa_tabungan, 0, ".", "."); ?></span>
+												<span class="my-2 text-xs"><?= number_format($data->nominal >= 0 ? $data->nominal : 0, 0, ".", "."); ?></span>
 											</td>
 											<td class="font-weight-normal">
-												<span class="my-2 text-xs">Rp<?= number_format($data->nominal, 0, ".", "."); ?></span>
+												<span class="my-2 text-xs"><?= number_format($data->nominal < 0 ? $data->nominal : 0, 0, ".", "."); ?></span>
 											</td>
 											<td class="font-weight-normal">
-												<span class="my-2 text-xs">Rp<?= number_format($data->jumlah_tabungan, 0, ".", "."); ?></span>
+												<span class="my-2 text-xs">Rp<?= number_format($data->sisa_tabungan + $data->nominal, 0, ".", "."); ?></span>
 											</td>
 										</tr>
 									<?php endforeach ?>

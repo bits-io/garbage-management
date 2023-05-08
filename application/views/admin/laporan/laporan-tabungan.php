@@ -30,7 +30,7 @@
 										</div>
 									</div>
 									<div class="card-body">
-										<form action="<?= base_url($page_name.'/add_process') ?>" method="post" class="multisteps-form__form" style="height: 330px;">
+										<form action="<?= base_url($page_name.'/cetak') ?>" method="get" class="multisteps-form__form" style="height: 330px;" target="_blank">
 											<div class="multisteps-form__panel border-radius-xl bg-white js-active" data-animation="FadeIn">
 												<h5 class="font-weight-bolder mb-1">Cetak <?= $title ?></h5>
 												<div class="multisteps-form__content">
@@ -51,12 +51,12 @@
 														<div class="col-12 col-sm-6">
 															<div class="input-group input-group-static">
 																<label class="">Dari Tanggal</label>
-																<input required value="<?= $dari ?>" name="dari_tgl" placeholder="Tanggal Lahir" class="multisteps-form__input form-control" type="date" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
+																<input required value="<?= $dari ?>" name="dari" class="multisteps-form__input form-control" type="date" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
 														</div>
 														<div class="col-12 col-sm-6">
 															<div class="input-group input-group-static">
 																<label class="">Sampai Tanggal</label>
-																<input  value="<?= $sampai ?>" name="sampai_tgl" placeholder="Tanggal Lahir" class="multisteps-form__input form-control" type="date" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
+																<input  value="<?= $sampai ?>" name="sampai"class="multisteps-form__input form-control" type="date" onfocus="focused(this)" onfocusout="defocused(this)"> </div>
 														</div>
 													</div>
 													<div class="button-row d-flex justify-content-end mt-4">
