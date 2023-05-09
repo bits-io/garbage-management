@@ -2,51 +2,22 @@
 <html lang="en">
 
 <head>
-    <!-- paper -->
-	<link rel="stylesheet" href="<?= base_url() ?>assets/paper/paper.css">
-	<?php $this->load->view('partials/head.php') ?>
-	<style>
-	    @media print {
-	        body.A4 {
-	            width: 210mm;
-	            height: 297mm;
-	        }
-
-	        .sheet {
-	            margin: 0;
-	            box-shadow: none;
-	            page-break-after: always;
-	        }
-	    }
-		body.A4 {
-	            width: 210mm;
-	            height: 297mm;
-				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-				margin-top: 2rem;
-				margin-left: auto;
-				margin-right: auto;
-	        }
-
-	        .sheet {
-	            margin: 0;
-	            box-shadow: none;
-	            page-break-after: always;
-	        }
-	</style>
+<link id="pagestyle" href="<?= base_url(); ?>assets/css/material-dashboard.min.css?v=3.0.5" rel="stylesheet" />
+<link id="pagestyle" href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet" />
 </head>
 
-<body class="A4">
-    <div class="sheet">
+<body>
+    <div class="A4">
         <table align="center" style="margin-top: 10px; margin-bottom: 2px;">
             <td align="center">
-                <h3>BANK SAMPAH CIKAL</h3>
-				<h4>KELURAHAN KARANGANYAR KECAMATAN KAWALU</h3>
-                <h5>Alamat : Kampung Cibuyut, RT 01 RW 01, Kelurahan Karanganyar, Kecamatan Kawalau, Kota Tasikmalaya"</h4>
+                <h4>BANK SAMPAH CIKAL</h4>
+				<h5>KELURAHAN KARANGANYAR KECAMATAN KAWALU</h5>
+                <p>Alamat : Kampung Cibuyut, RT 01 RW 01, Kelurahan Karanganyar, Kecamatan Kawalau, Kota Tasikmalaya"</p>
             </td>
         </table>
         <hr noshade size=4 width="98%">
-        <div style="width:100%" align="center">
-            <p>Customer : <?= $ns[0]->nama ?></p>
+        <div style="width:100%" align="left">
+            <p>Nasabah : <?= $ns[0]->nama ?></p>
             <p>Tanggal : <?= date('d/m/Y', strtotime($ns[0]->created_at)) ?></p>
         </div>
         <div style="width:90%; margin-left: 25px;" align="center" style="margin:10px;">
@@ -93,7 +64,6 @@
             <script>
             </script>
         </div>
-		<button onclick="window.print()" class="btn btn-primary d-print-none">Print</button>
         <table align="right" width="40%"><br><br>
             <tr align="center">
                 <td>Tasikmalaya, <?= date('d-m-Y') ?></td>
@@ -116,5 +86,7 @@
         </table>
     </div>
 </body>
-
+<script>
+	window.print();
+</script>
 </html>

@@ -151,6 +151,28 @@
           </ul>
         </div>
       </li>
+			<li class="nav-item">
+        <a data-bs-toggle="collapse" href="#reportExamples" class="nav-link text-white active" aria-controls="reportExamples" role="button" aria-expanded="false">
+          <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">history</i>
+          <span class="nav-link-text ms-2 ps-1">Laporan</span>
+        </a>
+        <div class="collapse  show " id="reportExamples">
+          <ul class="nav ">
+            <li class="nav-item ">
+              <a class="nav-link text-white " href="<?= base_url() ?>laporan/transaksi">
+                <span class="sidenav-mini-icon"> RT </span>
+                <span class="sidenav-normal  ms-2  ps-1"> Laporan Transaksi </span>
+              </a>
+            </li>
+						<li class="nav-item ">
+              <a class="nav-link text-white " href="<?= base_url() ?>laporan/nasabah">
+                <span class="sidenav-mini-icon"> RT </span>
+                <span class="sidenav-normal  ms-2  ps-1"> Laporan Nasabah </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
 			<?php endif; ?>
 			<?php if ($this->session->login['role'] == 'nasabah'): ?>
 			<li class="nav-item">

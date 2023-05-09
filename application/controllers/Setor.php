@@ -208,6 +208,37 @@ class Setor extends CI_Controller
 		redirect('setor');
 	}
 
-	
+	public function laporanTransaksi()
+	{
+		$data['title'] = 'Data Transaksi';
+		$data['button'] = 'Ambil Transaksi';
+		$data['page_name'] = 'laporan/transaksi';
+
+		$data['dari'] = date('Y-m-01');
+		$data['sampai'] = date('Y-m-d', strtotime($data['dari'] . ' + 1 months'));
+
+		$data['ns'] = $this->m->Get_All('tbl_nasabah', '*');
+
+		$this->load->view('admin/laporan/laporan-transaksi', $data);
+	}
+	public function cetakLaporanTransaksi()
+	{
+		$id_nasabah = $this->input->get('id_nasabah');
+		$data['ns'] = $this->m->Get_Where(['id_nasabah' => $id_nasabah], 'tbl_nasabah');
+
+		$data['ns'] = $this->m->Get_All('tbl_nasabah', '*');
+
+		$this->db->select('t.id_tabungan, t.id_nasabah, t.jumlah_tabungan, t.created_at as tabungan_created, t.updated_at as tabungan_updated, d.id_detail_tabungan, d.id_tabungan, d.tgl_transaksi, d.sisa_tabungan, d.nominal, d.created_at as detail_created, d.updated_at as detail_updated');
+		$this->db->from('tbl_tabungan t');
+		$this->db->join('tbl_detail_tabungan d', 't.id_tabungan = d.id_tabungan');
+		$this->db->where('t.id_nasabah', $id_nasabah);
+		$query = $this->db->get();
+		$data['arr_data'] = $query->result();
+
+		$data['dari'] = $_GET['dari'];
+		$data['sampai'] = $_GET['sampai'];
+
+		$this->load->view('admin/laporan/cetakTransaksi', $data);
+	}	
 }
 

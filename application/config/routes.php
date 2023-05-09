@@ -56,6 +56,9 @@ $route['riwayat-transaksi/detail/(:num)'] = 'RiwayatTransaksi/detail/$1';
 $route['laporan/tabungan'] = 'Tabungan/laporanTabungan';
 $route['laporan/tabungan/cetak'] = 'Tabungan/cetakLaporanTabungan';
 
+$route['laporan/transaksi'] = 'Setor/laporanTransaksi';
+$route['laporan/transaksi/cetak'] = 'Setor/cetakLaporanTransaksi';
+
 // customer route
 $route['nasabah/dashboard'] = 'Dashboard/nasabah';
 $route['nasabah/tabungan'] = 'Tabungan/index_nasabah';
