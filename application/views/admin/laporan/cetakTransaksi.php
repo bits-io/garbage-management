@@ -16,53 +16,52 @@
             </td>
         </table>
         <hr noshade size=4 width="98%">
-        <div style="width:100%" align="left">
-            <p>Nasabah : <?= $ns[0]->nama ?></p>
-            <p>Tanggal : <?= date('d/m/Y', strtotime($ns[0]->created_at)) ?></p>
+        <div style="width:100%" align="center">
+            <p>Dari Tanggal : <?= date('d-M-Y', strtotime($dari)) ?> Sampai Tanggal : <?= date('d-M-Y', strtotime($sampai)) ?></p>
         </div>
         <div style="width:90%; margin-left: 25px;" align="center" style="margin:10px;">
             <table id="tabelku" class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th class="text-center">ID Detail Tabungan</th>
-                        <th class="text-center">Tanggal</th>
-                        <th class="text-center">Masuk</th>
-                        <th class="text-center">Keluar</th>
-                        <th class="text-center">Jumlah Sisa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $no = 1;
-                    foreach ($arr_data as $data) {
-                    ?>
-                        <tr>
-                            <td class="text-center"><?= $data->id_detail_tabungan; ?>.</td>
-                            <td><?= $data->detail_created ?></td>
-                            <td>
-                                Rp
-                                <span class="float-right">
-									<?= number_format($data->nominal >= 0 ? $data->nominal : 0, 0, ".", "."); ?>
-                                </span>
-                            </td>
-							<td>
-                                Rp
-                                <span class="float-right">
-									<?= number_format($data->nominal < 0 ? $data->nominal : 0, 0, ".", "."); ?>
-                                </span>
-                            </td>
-                            <td>
-                                Rp
-                                <span class="float-right">
-                                    <?= number_format($data->sisa_tabungan + $data->nominal, 0, ".", "."); ?>
-                                </span>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
+			<thead>
+				<tr>
+					<th class="text-center align-middle" rowspan="2">Tanggal Transaksi</th>
+					<th class="text-center align-middle" colspan="<?= $jumlah_sampah ?>">Sampah</th>
+					<th class="text-center align-middle" rowspan="2">Total Transaksi</th>
+				</tr>
+				<tr>
+					<?php foreach ($sampah as $s) : ?>
+						<th class="text-center align-middle"><?= $s->nama_sampah ?></th>
+					<?php endforeach; ?>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				$total_per_tanggal = array();
+				foreach ($transaksi as $t) {
+					// tambahkan total transaksi ke array $total_per_tanggal
+					$tanggal = $t->tgl_transaksi;
+					$sampah_id = $t->id_sampah;
+					$total_transaksi = $t->total_transaksi;
+					if (!isset($total_per_tanggal[$tanggal])) {
+					$total_per_tanggal[$tanggal] = array();
+					}
+					$total_per_tanggal[$tanggal][$sampah_id] = $total_transaksi;
+				}
+
+				foreach ($total_per_tanggal as $tanggal => $total_per_sampah) {
+					echo '<tr>';
+					echo '<td class="text-center align-middle">' . $tanggal . '</td>';
+					foreach ($sampah as $s) {
+					$sampah_id = $s->id_sampah;
+					$total_transaksi = isset($total_per_sampah[$sampah_id]) ? $total_per_sampah[$sampah_id] : 0;
+					echo '<td>Rp  ' . number_format($total_transaksi, 0, ".", ".") . '</td>';
+					}
+					$total_transaksi_harian = array_sum($total_per_sampah);
+					echo '<td>Rp  ' . number_format($total_transaksi_harian, 0, ".", ".") . '</td>';
+					echo '</tr>';
+				}
+				?>
+			</tbody>
             </table>
-            <script>
-            </script>
         </div>
         <table align="right" width="40%"><br><br>
             <tr align="center">

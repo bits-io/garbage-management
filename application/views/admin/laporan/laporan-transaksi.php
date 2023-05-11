@@ -35,19 +35,6 @@
 												<h5 class="font-weight-bolder mb-1">Cetak <?= $title ?></h5>
 												<div class="multisteps-form__content">
 													<div class="row mt-3">
-														<div class="col-12 col-sm-12 mt-3 mt-sm-0">
-															<div class="input-group input-group-static">
-																<label for="jenisKelaminFormControl" class="">Nasabah</label>
-																<select required name="id_nasabah" class="form-control" id="jenisKelaminFormControl">
-																	<option value="">Pilih Nasabah</option>
-																	<?php foreach($ns as $data): ?>
-																		<option value="<?= $data->id_nasabah ?>"><?= $data->kode_nasabah ?> | <?= $data->nama ?></option>
-																	<?php endforeach ?>
-																</select>	
-															</div>
-														</div>
-													</div>
-													<div class="row mt-3">
 														<div class="col-12 col-sm-6">
 															<div class="input-group input-group-static">
 																<label class="">Dari Tanggal</label>

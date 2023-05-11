@@ -178,6 +178,8 @@ class Tabungan extends CI_Controller
 		$this->db->select('t.id_tabungan, t.id_nasabah, t.jumlah_tabungan, t.created_at as tabungan_created, t.updated_at as tabungan_updated, d.id_detail_tabungan, d.id_tabungan, d.tgl_transaksi, d.sisa_tabungan, d.nominal, d.created_at as detail_created, d.updated_at as detail_updated');
 		$this->db->from('tbl_tabungan t');
 		$this->db->join('tbl_detail_tabungan d', 't.id_tabungan = d.id_tabungan');
+		$this->db->where('tgl_transaksi >= "' . $_GET['dari'] . '"');
+		$this->db->where('tgl_transaksi <= "' . $_GET['sampai'] . '"');
 		$this->db->where('t.id_nasabah', $id_nasabah);
 		$query = $this->db->get();
 		$data['arr_data'] = $query->result();

@@ -217,23 +217,23 @@ class Setor extends CI_Controller
 		$data['dari'] = date('Y-m-01');
 		$data['sampai'] = date('Y-m-d', strtotime($data['dari'] . ' + 1 months'));
 
-		$data['ns'] = $this->m->Get_All('tbl_nasabah', '*');
-
 		$this->load->view('admin/laporan/laporan-transaksi', $data);
 	}
 	public function cetakLaporanTransaksi()
 	{
-		$id_nasabah = $this->input->get('id_nasabah');
-		$data['ns'] = $this->m->Get_Where(['id_nasabah' => $id_nasabah], 'tbl_nasabah');
 
-		$data['ns'] = $this->m->Get_All('tbl_nasabah', '*');
+		// query untuk mengambil data transaksi
+		$query_transaksi = $this->db->select('tgl_transaksi, id_sampah, SUM(total) AS total_transaksi')
+		->from('tbl_transaksi')
+		->join('tbl_jual', 'tbl_transaksi.id_transaksi = tbl_jual.id_transaksi')
+		->group_by('tgl_transaksi, id_sampah')
+		->order_by('tgl_transaksi, id_sampah')
+		->get();
+		$data['transaksi'] = $query_transaksi->result();
 
-		$this->db->select('t.id_tabungan, t.id_nasabah, t.jumlah_tabungan, t.created_at as tabungan_created, t.updated_at as tabungan_updated, d.id_detail_tabungan, d.id_tabungan, d.tgl_transaksi, d.sisa_tabungan, d.nominal, d.created_at as detail_created, d.updated_at as detail_updated');
-		$this->db->from('tbl_tabungan t');
-		$this->db->join('tbl_detail_tabungan d', 't.id_tabungan = d.id_tabungan');
-		$this->db->where('t.id_nasabah', $id_nasabah);
-		$query = $this->db->get();
-		$data['arr_data'] = $query->result();
+		// query untuk mengambil data sampah
+		$data['sampah'] = $this->m->Get_All('tbl_sampah', '*');
+		$data['jumlah_sampah'] = count($this->m->Get_All('tbl_sampah', '*'));
 
 		$data['dari'] = $_GET['dari'];
 		$data['sampai'] = $_GET['sampai'];

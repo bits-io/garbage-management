@@ -165,9 +165,9 @@
               </a>
             </li>
 						<li class="nav-item ">
-              <a class="nav-link text-white " href="<?= base_url() ?>laporan/nasabah">
+              <a class="nav-link text-white " href="<?= base_url() ?>laporan/tabungan">
                 <span class="sidenav-mini-icon"> RT </span>
-                <span class="sidenav-normal  ms-2  ps-1"> Laporan Nasabah </span>
+                <span class="sidenav-normal  ms-2  ps-1"> Laporan Tabungan </span>
               </a>
             </li>
           </ul>
