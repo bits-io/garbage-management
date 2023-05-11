@@ -14,9 +14,9 @@ class Dashboard extends CI_Controller {
 	{
 		$data['title'] = 'Dashboard';
 
-		$data['berat_sampah'] = $this->db->select_sum('berat_sampah')->get('tbl_jual')->row()->berat_sampah;
+		$data['berat_sampah'] = $this->db->select_sum('berat_sampah')->get('tbl_detail_transaksi')->row()->berat_sampah;
 
-		$data['total_pemasukan'] = $this->db->select_sum('harga')->get('tbl_jual')->row()->harga;
+		$data['total_pemasukan'] = $this->db->select_sum('harga')->get('tbl_detail_transaksi')->row()->harga;
 
 		$data['total_nasabah'] = $this->db->from('tbl_nasabah')->count_all_results();
 
@@ -35,7 +35,7 @@ class Dashboard extends CI_Controller {
 
 		$this->db->select_sum('berat_sampah');
 		$this->db->from('tbl_transaksi');
-		$this->db->join('tbl_jual', 'tbl_transaksi.id_transaksi = tbl_jual.id_transaksi');
+		$this->db->join('tbl_detail_transaksi', 'tbl_transaksi.id_transaksi = tbl_detail_transaksi.id_transaksi');
 		$this->db->where('tbl_transaksi.id_nasabah', $id_nasabah);
 		$data['total_sampah'] = $this->db->get()->result();
 

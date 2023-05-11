@@ -19,8 +19,6 @@
           <div>
 					<a href="<?= base_url($page_name.'/add') ?>" class="btn btn-icon bg-gradient-primary"> <?php echo $button ?> </a>
           </div>
-            <button class="btn btn-icon btn-outline-dark ms-2 export" data-type="csv" type="button">
-              <i class="material-icons text-xs position-relative">archive</i> Export CSV </button>
           </div>
         </div>
 				<?php $this->load->view('partials/notification.php') ?>
@@ -77,31 +75,7 @@
       </div>
     </main>
 
-
-    <div class="fixed-plugin">
-      <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-        <i class="material-icons py-2">settings</i>
-      </a>
-      <div class="card shadow-lg">
-        <div class="card-header pb-0 pt-3">
-          <div class="float-start">
-            <h5 class="mt-3 mb-0">Material UI Configurator</h5>
-            <p>See our dashboard options.</p>
-          </div>
-          <div class="float-end mt-4">
-            <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-              <i class="material-icons">clear</i>
-            </button>
-          </div>
-        </div>
-        <div class="card-body pt-sm-3 pt-0">
-          <hr class="horizontal dark my-sm-4">
-          <a class="btn bg-gradient-primary w-100" href="">Logout</a>
-          <a class="btn bg-gradient-info w-100" href="">Logout</a>
-          <a class="btn btn-outline-dark w-100" href="">Logout</a>
-        </div>
-      </div>
-    </div>
+		<?php $this->load->view('partials/right.php') ?>
     <?php $this->load->view('partials/js.php') ?>
   </body>
 </html>

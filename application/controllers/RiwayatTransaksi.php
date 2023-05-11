@@ -87,11 +87,11 @@ class RiwayatTransaksi extends CI_Controller
 		
 		$tr = $this->db;
 		$tr->select('*');
-		$tr->from('tbl_jual');
-		$tr->join('tbl_transaksi', 'tbl_transaksi.id_transaksi = tbl_jual.id_transaksi');
+		$tr->from('tbl_detail_transaksi');
+		$tr->join('tbl_transaksi', 'tbl_transaksi.id_transaksi = tbl_detail_transaksi.id_transaksi');
 		$tr->join('tbl_nasabah', 'tbl_nasabah.id_nasabah = tbl_transaksi.id_nasabah');
-		$tr->join('tbl_sampah', 'tbl_sampah.id_sampah = tbl_jual.id_sampah');
-		$tr->where('tbl_jual.id_transaksi', $id_transaksi);
+		$tr->join('tbl_sampah', 'tbl_sampah.id_sampah = tbl_detail_transaksi.id_sampah');
+		$tr->where('tbl_detail_transaksi.id_transaksi', $id_transaksi);
 		$tr->where('tbl_nasabah.id_nasabah', $id_nasabah);
 		$query = $tr->get();
 		if ($query->num_rows() < 0) {
@@ -139,9 +139,9 @@ class RiwayatTransaksi extends CI_Controller
 		
 		$tr = $this->db;
 		$tr->select('*');
-		$tr->from('tbl_jual');
-		$tr->join('tbl_transaksi', 'tbl_jual.id_transaksi = tbl_transaksi.id_transaksi');
-		$tr->join('tbl_sampah', 'tbl_jual.id_sampah = tbl_sampah.id_sampah'); // tambahan join
+		$tr->from('tbl_detail_transaksi');
+		$tr->join('tbl_transaksi', 'tbl_detail_transaksi.id_transaksi = tbl_transaksi.id_transaksi');
+		$tr->join('tbl_sampah', 'tbl_detail_transaksi.id_sampah = tbl_sampah.id_sampah'); // tambahan join
 		$tr->where('tbl_transaksi.id_transaksi', $id);
 		$data['arr_data'] = $tr->get()->result();
 

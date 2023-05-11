@@ -103,7 +103,7 @@
 			</div>
     </main>
 
-		<?php $this->load->view('partials/right.php') ?>
+	<?php $this->load->view('partials/right.php') ?>
     
     <?php $this->load->view('partials/js.php') ?>
   </body>

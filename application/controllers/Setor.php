@@ -116,7 +116,7 @@ class Setor extends CI_Controller
 					'created_at' => $createdAt,
 					'updated_at' => $updatedAt
 				);
-				$this->m->Save($data_detail_transaksi, 'tbl_jual');
+				$this->m->Save($data_detail_transaksi, 'tbl_detail_transaksi');
 			}
 			$jumlah_tabungan = intval($tabungan[0]->jumlah_tabungan + $total);
 			$this->m->Update(['id_nasabah' => $id_nasabah], ['jumlah_tabungan' => $jumlah_tabungan], 'tbl_tabungan');
@@ -157,9 +157,9 @@ class Setor extends CI_Controller
 		
 		$detail = $this->db;
 		$detail->select('*');
-		$detail->from('tbl_jual');
-		$detail->join('tbl_sampah', 'tbl_jual.id_sampah = tbl_sampah.id_sampah');
-		$detail->join('tbl_transaksi', 'tbl_jual.id_transaksi = tbl_transaksi.id_transaksi');
+		$detail->from('tbl_detail_transaksi');
+		$detail->join('tbl_sampah', 'tbl_detail_transaksi.id_sampah = tbl_sampah.id_sampah');
+		$detail->join('tbl_transaksi', 'tbl_detail_transaksi.id_transaksi = tbl_transaksi.id_transaksi');
 		$detail->join('tbl_nasabah', 'tbl_transaksi.id_nasabah = tbl_nasabah.id_nasabah');
 		$detail->where('tbl_transaksi.id_transaksi', $id);
 		$data['detail'] = $detail->get()->result();
@@ -195,7 +195,7 @@ class Setor extends CI_Controller
 		$this->m->Update(['id_nasabah' => $tr[0]->id_nasabah], ['jumlah_tabungan' => $jumlah_tabungan, 'updated_at' => $updatedAt], 'tbl_tabungan');
 
 		$data['tr'] = $this->m->Delete(['id_transaksi' => $id], 'tbl_transaksi');
-		$data['detail'] = $this->m->Delete(['id_transaksi' => $id], 'tbl_jual');
+		$data['detail'] = $this->m->Delete(['id_transaksi' => $id], 'tbl_detail_transaksi');
 		
 
 		$data['title'] = 'Data Setor';
@@ -225,7 +225,7 @@ class Setor extends CI_Controller
 		// query untuk mengambil data transaksi
 		$query_transaksi = $this->db->select('tgl_transaksi, id_sampah, SUM(total) AS total_transaksi')
 		->from('tbl_transaksi')
-		->join('tbl_jual', 'tbl_transaksi.id_transaksi = tbl_jual.id_transaksi')
+		->join('tbl_detail_transaksi', 'tbl_transaksi.id_transaksi = tbl_detail_transaksi.id_transaksi')
 		->group_by('tgl_transaksi, id_sampah')
 		->order_by('tgl_transaksi, id_sampah')
 		->get();

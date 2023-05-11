@@ -136,13 +136,13 @@
         </div>
       </li>
       <li class="nav-item">
-        <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link text-white active" aria-controls="ecommerceExamples" role="button" aria-expanded="false">
+				<a data-bs-toggle="collapse" href="#historyExamples" class="nav-link text-white " aria-controls="historyExamples" role="button" aria-expanded="false">
           <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">history</i>
           <span class="nav-link-text ms-2 ps-1">Riwayat</span>
         </a>
-        <div class="collapse  show " id="ecommerceExamples">
+        <div class="collapse " id="historyExamples">
           <ul class="nav ">
-            <li class="nav-item ">
+            <li class="nav-item">
               <a class="nav-link text-white " href="<?= base_url('riwayat-transaksi') ?>">
                 <span class="sidenav-mini-icon"> RT </span>
                 <span class="sidenav-normal  ms-2  ps-1"> Riwayat Transaksi </span>
@@ -156,7 +156,7 @@
           <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">history</i>
           <span class="nav-link-text ms-2 ps-1">Laporan</span>
         </a>
-        <div class="collapse  show " id="reportExamples">
+        <div class="collapse " id="reportExamples">
           <ul class="nav ">
             <li class="nav-item ">
               <a class="nav-link text-white " href="<?= base_url() ?>laporan/transaksi">
