@@ -16,7 +16,7 @@
 		
 		<div class="container-fluid px-2 px-md-4">
 			<div class="col-6 mx-auto">
-				<div class="page-header min-height-300 border-radius-xl mt-4">
+				<div class="page-header min-height-100 border-radius-xl mt-4">
 					<span class="mask  bg-gradient-success  opacity-6"></span>
 				</div>
 				<div class="card card-body mx-3 mx-md-4 mt-n6">
