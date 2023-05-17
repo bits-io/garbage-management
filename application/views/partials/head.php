@@ -5,9 +5,10 @@
 <title>Bank Sampah</title>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"> -->
 <link id="pagestyle" href="<?= base_url(); ?>assets/css/material-dashboard.min.css?v=3.0.6" rel="stylesheet" />
-<link id="pagestyle" href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet" />
+<link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/views/partials/custom.css.php">
 <style>
   .async-hide {
     opacity: 0 !important
@@ -31,4 +32,4 @@
   });
 </script>
 <!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="<?= base_url(); ?>assets/select2-4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

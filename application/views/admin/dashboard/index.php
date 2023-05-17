@@ -98,7 +98,6 @@
 						</div>
 					</div>
 				</div>
-
 				<?php $this->load->view('partials/footer.php') ?>
 			</div>
     </main>

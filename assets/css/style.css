@@ -4,3 +4,36 @@
 /* .bg-gradient-dark {
     background-image: linear-gradient(156deg,#1e6e4d,#00ff5a);
 } */
+@font-face {
+    font-family: 'Material Icons Round';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons Round'),
+         local('MaterialIconsRound-Regular'),
+         url('/garbage-management/assets/fonts/MaterialIconsRound-Regular.otf') format('opentype');
+}
+
+.material-icons-round {
+    font-family: 'Material Icons Round';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Ukuran ikon yang disukai */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Dukungan untuk semua browser WebKit. */
+    -webkit-font-smoothing: antialiased;
+    /* Dukungan untuk Safari dan Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Dukungan untuk Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Dukungan untuk IE. */
+    font-feature-settings: 'liga';
+}

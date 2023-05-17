@@ -105,7 +105,7 @@
       </li>
 			<li class="nav-item">
         <a data-bs-toggle="collapse" href="#saveExamples" class="nav-link text-white " aria-controls="saveExamples" role="button" aria-expanded="false">
-          <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">savings</i>
+          <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">account_balance_wallet</i>
           <span class="nav-link-text ms-2 ps-1">Tabungan</span>
         </a>
         <div class="collapse " id="saveExamples">
@@ -177,7 +177,7 @@
 			<?php if ($this->session->login['role'] == 'nasabah'): ?>
 			<li class="nav-item">
 				<a class="nav-link text-white " href="<?= base_url('nasabah/tabungan') ?>">
-					<i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">savings</i>
+					<i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">account_balance_wallet</i>
           <span class="sidenav-normal  ms-2  ps-1"> Tabungan </span>
         </a>
       </li>
