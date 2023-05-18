@@ -10,7 +10,7 @@
     font-weight: 400;
     src: local('Material Icons Round'),
          local('MaterialIconsRound-Regular'),
-         url('/garbage-management/assets/fonts/MaterialIconsRound-Regular.otf') format('opentype');
+         url('../fonts/MaterialIconsRound-Regular.otf') format('opentype');
 }
 
 .material-icons-round {

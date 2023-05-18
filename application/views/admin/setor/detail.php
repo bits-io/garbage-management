@@ -106,7 +106,8 @@
 							</div>
 						</div>
 					</div>
-					<a class="btn btn-secondary mt-3 mb-3 ms-2 mb-0 js-btn-next" href="<?= base_url($page_name) ?>" title="Next">Kembali</a>
+					<a class="btn btn-secondary mt-3 mb-3 ms-2 mb-0 js-btn-next" href="<?= base_url(  $page_name.'/detail/' . $data->id_transaksi.'/cetak') ?>" target="_blank" title="Next">Print</a>
+					<a class="btn btn-outline-secondary mb-3 ms-2 mb-0 js-btn-next" href="<?= base_url($page_name) ?>" title="Next">Kembali</a>
 				</div>
 			</div>
 		

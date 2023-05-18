@@ -208,6 +208,44 @@ class Setor extends CI_Controller
 		redirect('setor');
 	}
 
+	public function laporanPerTransaksi()
+	{
+		$id = intval($this->uri->segment(3));
+		if ($this->session->login['role'] == 'nasabah'){
+			$this->session->unset_userdata('success');
+			$this->session->set_tempdata('error', 'Tambah data hanya untuk admin!',5);
+			redirect('dashboard');
+		}
+
+		if (!$this->m->Get_Where(['id_transaksi' => $id], 'tbl_transaksi')) {
+			$this->session->unset_userdata('success');
+			$this->session->set_tempdata('error', 'Data tidak ditemukan!',5);
+			redirect('setor');
+		}
+
+		$tr = $this->db;
+		$tr->select('*');
+		$tr->from('tbl_transaksi');
+		$tr->join('tbl_nasabah', 'tbl_transaksi.id_nasabah = tbl_nasabah.id_nasabah');
+		$tr->where('tbl_transaksi.id_transaksi', $id);
+		$data['tr'] = $tr->get()->result();
+		
+		$detail = $this->db;
+		$detail->select('*');
+		$detail->from('tbl_detail_transaksi');
+		$detail->join('tbl_sampah', 'tbl_detail_transaksi.id_sampah = tbl_sampah.id_sampah');
+		$detail->join('tbl_transaksi', 'tbl_detail_transaksi.id_transaksi = tbl_transaksi.id_transaksi');
+		$detail->join('tbl_nasabah', 'tbl_transaksi.id_nasabah = tbl_nasabah.id_nasabah');
+		$detail->where('tbl_transaksi.id_transaksi', $id);
+		$data['detail'] = $detail->get()->result();
+
+		$data['title'] = 'Data Setor';
+		$data['button'] = 'Tambah Setor';
+		$data['page_name'] = 'setor';
+
+		$this->load->view('admin/setor/laporanPerTransaksi', $data);
+	}
+
 	public function laporanTransaksi()
 	{
 		$data['title'] = 'Data Transaksi';
