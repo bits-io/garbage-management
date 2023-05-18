@@ -1,7 +1,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="apple-touch-icon" sizes="76x76" href="https://img.icons8.com/glyph-neue/64/40C057/recycle-bin.png">
-<link rel="icon" type="image/png" href="https://img.icons8.com/glyph-neue/64/40C057/recycle-bin.png">
+<link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>assets/img/icons/icons8-recycle-bin-64.png">
+<link rel="icon" type="image/png" href="<?= base_url() ?>assets/img/icons/icons8-recycle-bin-64.png">
 <title>Bank Sampah</title>
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
