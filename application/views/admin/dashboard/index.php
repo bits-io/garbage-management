@@ -29,7 +29,7 @@
 								</div>
 								<div class="text-end pt-1">
 									<p class="text-sm mb-0 text-capitalize">Total Sampah</p>
-									<h4 class="mb-0"><?= $berat_sampah ?> Kg</h4>
+									<h4 class="mb-0"><?= number_format( $berat_sampah , 0, ".", ".") ?> Kg</h4>
 								</div>
 							</div>
 							<hr class="dark horizontal my-0">
@@ -48,7 +48,7 @@
 								</div>
 								<div class="text-end pt-1">
 									<p class="text-sm mb-0 text-capitalize">Total Sampah</p>
-									<h4 class="mb-0"><?= $total_sampah ?></h4>
+									<h4 class="mb-0"><?= number_format( $total_sampah , 0, ".", ".") ?></h4>
 								</div>
 							</div>
 							<hr class="dark horizontal my-0">
@@ -67,7 +67,7 @@
 								</div>
 								<div class="text-end pt-1">
 									<p class="text-sm mb-0 text-capitalize">Total Nasabah</p>
-									<h4 class="mb-0"><?= $total_nasabah ?></h4>
+									<h4 class="mb-0"><?= number_format( $total_nasabah , 0, ".", ".") ?></h4>
 								</div>
 							</div>
 							<hr class="dark horizontal my-0">
@@ -86,7 +86,7 @@
 								</div>
 								<div class="text-end pt-1">
 									<p class="text-sm mb-0 text-capitalize">Total Pemasukan</p>
-									<h4 class="mb-0">Rp<?= $total_pemasukan ?></h4>
+									<h4 class="mb-0">Rp<?= number_format( $total_pemasukan , 0, ".", ".") ?></h4>
 								</div>
 							</div>
 							<hr class="dark horizontal my-0">

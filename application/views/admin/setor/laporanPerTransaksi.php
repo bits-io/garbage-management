@@ -36,7 +36,10 @@
                 <tbody>
                     <?php
                     $no = 1;
+					$total = 0; // Inisialisasi variabel total
                     foreach ($detail as $data) {
+						$subtotal = $data->harga * $data->berat_sampah; // Hitung subtotal per baris
+						$total += $subtotal; // Tambahkan subtotal ke total
                     ?>
                         <tr>
                             <td class="text-center"><?= $data->nama_sampah ?></td>
@@ -50,10 +53,16 @@
                             <td>
                                 Rp
                                 <span class="float-right">
-									<?= number_format($data->harga * $data->berat_sampah, 0, ".", "."); ?>
+									<?= number_format($subtotal, 0, ".", "."); ?>
                                 </span>
                             </td>
                         </tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td align="right"><b>Total</b></td>
+							<td><b>Rp <span class="float-right"><?= number_format($total, 0, ".", "."); ?></b></span></td>
+						</tr>
                     <?php } ?>
                 </tbody>
             </table>

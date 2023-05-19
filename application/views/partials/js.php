@@ -37,7 +37,7 @@
     Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
   }
 </script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script async defer src="<?= base_url(); ?>assets/js/github-buttons.js"></script>
 <script src="<?= base_url(); ?>assets/js/material-dashboard.min.js?v=3.0.6"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="<?= base_url(); ?>assets/select2-4.1.0-rc.0/dist/js/select2.min.js"></script>

@@ -3,11 +3,14 @@
 <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>assets/img/icons/icons8-recycle-bin-64.png">
 <link rel="icon" type="image/png" href="<?= base_url() ?>assets/img/icons/icons8-recycle-bin-64.png">
 <title>Bank Sampah</title>
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"> -->
+<script src="<?= base_url(); ?>assets/js/kit-fontawesome-42d5adcbca.js" crossorigin="anonymous"></script>
+
+<link href="<?= base_url(); ?>assets/fontawesome-free-5.15.4-web/css/all.css" rel="stylesheet" />
+
 <link id="pagestyle" href="<?= base_url(); ?>assets/css/material-dashboard.min.css?v=3.0.6" rel="stylesheet" />
+
 <link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet" />
+
 <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/views/partials/custom.css.php">
 <style>
   .async-hide {
